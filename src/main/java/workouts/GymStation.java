@@ -92,6 +92,11 @@ public class GymStation {
                 this.getNumberOfSets(),
                 this.getSpecificSet(0)));
         return format.toString();
+<<<<<<< HEAD
+=======
+//        for (String key : allVariations.keySet()) {
+//        }
+>>>>>>> 95d33e71a73c72b8cf5b2b2730132a6fc61fdd6f
 
     }
 
