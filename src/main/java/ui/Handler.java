@@ -30,6 +30,9 @@ public class Handler {
      * @throws IllegalArgumentException If an error occurs during command processing.
      */
     public static void processInput() {
+        if(in == null){
+            initialiseScanner();
+        }
         while (in.hasNextLine()) {
             String userInput = in.nextLine();
             String instruction = userInput.toUpperCase().split(" ")[0];
@@ -371,7 +374,7 @@ public class Handler {
         Output.printGoodbyeMessage();
         // Yet to implement : Reply.printReply("Saved tasks as: " + Constant.FILE_NAME);
         LogFile.writeLog("Bot exited gracefully", false);
-        in.close();
+        destroyScanner();
         System.exit(0);
     }
 }
