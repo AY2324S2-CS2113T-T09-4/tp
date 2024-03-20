@@ -90,6 +90,9 @@ public class GymStation {
                 this.getNumberOfSets(),
                 this.getSpecificSet(0)));
         return format.toString();
+//        for (String key : allVariations.keySet()) {
+//        }
+
     }
 
 }
