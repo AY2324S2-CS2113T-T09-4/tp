@@ -51,7 +51,6 @@ class HandlerTest {
         Handler.in.close();
         String output = outContent.toString();
         assertTrue(output.contains("Initiating PulsePilot landing sequence..."));
-        Handler.in.close();
     }
 
     @Test
