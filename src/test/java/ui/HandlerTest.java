@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,31 +46,33 @@ class HandlerTest {
     void processInput_exitCommand_terminatesProgram() {
         String input = "EXIT";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-
+        Handler.in = new Scanner(System.in);
         Handler.processInput();
-
+        Handler.in.close();
         String output = outContent.toString();
         assertTrue(output.contains("Initiating PulsePilot landing sequence..."));
+        Handler.in.close();
     }
 
     @Test
     void processInput_newCommand_addRunExercise() {
         String input = "NEW /e:run /d:10.3 /t:00:40:10 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-
+        Handler.in = new Scanner(System.in);
         Handler.processInput();
-
+        Handler.in.close();
         String output = outContent.toString();
         assertTrue(output.contains("Successfully added a new run session"));
+
     }
 
     @Test
     void processInput_healthCommand_addBMIHealthData() {
         String input = "HEALTH /h:bmi /height:1.70 /weight:65 /date:15-03-2024";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-
+        Handler.in = new Scanner(System.in);
         Handler.processInput();
-
+        Handler.in.close();
         String output = outContent.toString();
         assertTrue(output.contains("Added: bmi | 1.70 | 65 | 15-03-2024"));
     }

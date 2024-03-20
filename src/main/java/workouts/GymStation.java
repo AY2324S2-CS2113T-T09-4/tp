@@ -1,6 +1,7 @@
 package workouts;
 
 import utility.Constant;
+
 import java.util.ArrayList;
 
 /**
@@ -15,12 +16,12 @@ public class GymStation {
      * Constructs a new GymStation object that contains the name, weight, number of repetitions and number of sets done
      * in one station.
      *
-     * @param name String name of the station
-     * @param weight Weight used.
-     * @param repetition Number of reps done.
+     * @param name         String name of the station
+     * @param weight       Weight used.
+     * @param repetition   Number of reps done.
      * @param numberOfSets Number of sets done.
      */
-    public GymStation(String name, int weight, int repetition , int numberOfSets) {
+    public GymStation(String name, int weight, int repetition, int numberOfSets) {
         this.stationName = name;
         this.numberOfSets = numberOfSets;
         processSets(weight, repetition);
@@ -28,10 +29,11 @@ public class GymStation {
 
     /**
      * Function which adds the gym sets to
+     *
      * @param weight
      * @param repetition
      */
-    public void processSets(int weight, int repetition){
+    public void processSets(int weight, int repetition) {
         for (int i = 0; i < numberOfSets; i++) {
             GymSet newSet = new GymSet(weight, repetition);
             sets.add(newSet);
@@ -52,7 +54,7 @@ public class GymStation {
      *
      * @return The ArrayList of GymSet objects.
      */
-    public  ArrayList<GymSet> getSets() {
+    public ArrayList<GymSet> getSets() {
         return sets;
     }
 
@@ -90,8 +92,6 @@ public class GymStation {
                 this.getNumberOfSets(),
                 this.getSpecificSet(0)));
         return format.toString();
-//        for (String key : allVariations.keySet()) {
-//        }
 
     }
 
