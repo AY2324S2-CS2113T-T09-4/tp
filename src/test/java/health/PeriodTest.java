@@ -56,7 +56,7 @@ class PeriodTest {
      * the last Period object added.
      */
     @Test
-    void showLatestPeriod_twoPeriodInputs_printCorrectPeriod() {
+    void showLatestPeriod_twoPeriodInputs_printCorrectPeriod() throws CustomExceptions.OutOfBounds {
         Period firstPeriod = new Period("09-02-2023", "16-02-2023");
         Period secondPeriod = new Period("09-03-2023", "16-03-2023");
 
@@ -82,13 +82,15 @@ class PeriodTest {
      * the period history correctly.
      */
     @Test
-    void showPeriodHistory_twoInputs_printCorrectPeriodHistory() {
+    void showPeriodHistory_twoInputs_printCorrectPeriodHistory() throws CustomExceptions.OutOfBounds {
         Period firstPeriod = new Period("10-04-2023", "16-04-2023");
         Period secondPeriod = new Period("09-05-2023", "16-05-2023");
         HealthList.addPeriod(firstPeriod);
         HealthList.addPeriod(secondPeriod);
 
-        String expected = "Period Start: "
+        String expected = "Your Period history:"
+                + System.lineSeparator() +
+                "Period Start: "
                 + firstPeriod.getStartDate()
                 + " Period End: "
                 + firstPeriod.getEndDate()

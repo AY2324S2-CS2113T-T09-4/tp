@@ -18,8 +18,7 @@ import java.util.Scanner;
 import storage.LogFile;
 
 /**
- * Represents user input parsing and handling
- * before providing feedback to the user.
+ * Represents user input parsing and handling before providing feedback to the user.
  */
 public class Handler {
     public static Scanner in;
@@ -82,6 +81,7 @@ public class Handler {
         }
     }
 
+    //@@author JustinSoh
 
     /**
      * Handles workout command.
@@ -89,7 +89,6 @@ public class Handler {
      *
      * @param userInput The user input string.
      */
-    //@@author JustinSoh
     public static void handleWorkout(String userInput) {
         try {
             String typeOfWorkout = Parser.extractSubstringFromSpecificIndex(userInput,
@@ -132,6 +131,7 @@ public class Handler {
      * Deletes an item stored within PulsePilot.
      *
      * @param userInput The user input string.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid.
      */
     public static void handleDelete(String userInput) throws CustomExceptions.InvalidInput {
         String[] parsedInputs = Parser.parseDeleteInput(userInput);

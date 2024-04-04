@@ -1,0 +1,36 @@
+@startuml
+mainframe **sd** validateRunInput
+participant Parser as Parser << Class >>
+participant Validation as Validation << Class >>
+
+activate Parser  #DarkSalmon
+Parser -> Validation : validateRunInput()
+activate Validation #FFBBBB
+
+Validation -> Validation : isEmptyParameterPresent()
+activate Validation  #DarkSalmon
+Validation --> Validation :
+deactivate Validation  #DarkSalmon
+
+Validation -> Validation : validateRunTimeInput()
+activate Validation  #DarkSalmon
+Validation --> Validation :
+deactivate Validation  #DarkSalmon
+
+alt date != null
+Validation -> Validation : validateDateInput()
+activate Validation  #Red
+Validation --> Validation :
+deactivate Validation  #Red
+
+Validation -> Validation : validateDateNotAfterToday()
+activate Validation  #Red
+Validation --> Validation :
+deactivate Validation  #Red
+Validation --> Parser:
+
+else date == null
+Validation --> Parser:
+deactivate Validation #FFBBBB
+end
+@enduml

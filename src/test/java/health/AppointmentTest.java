@@ -29,7 +29,7 @@ public class AppointmentTest {
     }
 
     @Test
-    void showAppointmentList_printCorrectAppointmentList() {
+    void showAppointmentList_printCorrectAppointmentList() throws CustomExceptions.OutOfBounds {
         Appointment firstAppointment = new Appointment("25-03-2024", "16:30", "Physiotherapy session");
         Appointment secondAppointment = new Appointment("22-03-2024", "16:00", "Wound dressing change");
         Appointment thirdAppointment = new Appointment("22-03-2024", "11:00", "Doctor consultation");
@@ -38,7 +38,9 @@ public class AppointmentTest {
         HealthList.addAppointment(secondAppointment);
         HealthList.addAppointment(thirdAppointment);
 
-        String expected = "1. On "
+        String expected = "Your Appointment history:"
+                + System.lineSeparator()
+                + "1. On "
                 + thirdAppointment.getDate()
                 + " at "
                 + thirdAppointment.getTime()
@@ -80,6 +82,8 @@ public class AppointmentTest {
                 + secondAppointment.getTime()
                 + ": "
                 + secondAppointment.getDescription()
+                + System.lineSeparator()
+                + "Your Appointment history:"
                 + System.lineSeparator()
                 + "1. On "
                 + thirdAppointment.getDate()

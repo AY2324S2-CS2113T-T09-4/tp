@@ -1,0 +1,56 @@
+@startuml
+
+skinparam sequenceReferenceBackgroundColor lightblue
+actor User
+participant Handler as Handler << Class >>
+participant Parser as Parser << Class >>
+participant HealthList as "BmiList:HealthList"
+participant Output as Output << Class >>
+
+User -> Handler: userInput
+activate Handler #FFBBBB
+Handler -> Handler : processInput()
+activate Handler #Salmon
+Handler -> Handler : handleHealth()
+
+activate Handler #DarkSalmon
+Handler -> Parser  : extractSubstringFromSpecificIndex()
+activate Parser  #FFBBBB
+Parser  --> Handler : typeOfHealth
+deactivate Parser  #FFBBBB
+
+Handler -> Parser : parseBmiInput
+activate Parser  #FFBBBB
+Parser -> Parser : splitBmiInput
+activate Parser  #DarkSalmon
+ref over Parser: validateBmiInput
+
+deactivate Handler  #FFBBBB
+Parser --> Parser : bmiDetails
+deactivate Parser  #DarkSalmon
+
+Parser -> ":Bmi" ** : Bmi
+activate ":Bmi" #FFBBBB
+":Bmi" -> ":Bmi" : calculateBmiValue
+activate ":Bmi" #DarkSalmon
+":Bmi" --> ":Bmi" : bmi
+deactivate ":Bmi" #DarkSalmon
+
+":Bmi" -> ":Bmi" : getBmiCategory
+activate ":Bmi" #DarkSalmon
+":Bmi" --> ":Bmi" : String
+deactivate ":Bmi" #DarkSalmon
+":Bmi" --> Parser : newBmi:Bmi
+deactivate ":Bmi" #FFBBBB
+
+Parser -> HealthList : addBmi
+activate HealthList  #FFBBBB
+HealthList --> Parser :
+deactivate HealthList  #FFBBBB
+
+Parser -> Output : printAddBmi
+activate Output #FFBBBB
+Output --> User :
+deactivate Output #FFBBBB
+
+@enduml

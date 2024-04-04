@@ -8,8 +8,9 @@ import constants.HealthConstant;
 import java.time.LocalDate;
 
 /**
- * The Bmi class extends the Health class and provides functionality to calculate
- * and categorise the Body Mass Index based on user's height and weight.
+ * The Bmi class extends the Health class.
+ * It contains information about the height, weight, and bmi value of the user, and provides functionalities
+ * to calculate and categories the bmi values.
  */
 public class Bmi extends Health {
     /**
@@ -59,16 +60,16 @@ public class Bmi extends Health {
     }
 
     /**
-     * Returns BMI Value recorded in Bmi object.
+     * Retrieves BMI value recorded in Bmi object of String type.
      *
-     * @return The BMI Value recorded in the Bmi object.
+     * @return The BMI value recorded in the Bmi object.
      */
     public String getBmiValue() {
         return String.format(HealthConstant.TWO_DECIMAL_PLACE_FORMAT, bmiValue);
     }
 
     /**
-     * Returns height recorded in Bmi object.
+     * Retrieves height recorded in Bmi object of String type.
      *
      * @return The height recorded in the Bmi object.
      */
@@ -77,7 +78,7 @@ public class Bmi extends Health {
     }
 
     /**
-     * Returns weight recorded in Bmi object.
+     * Retrieves weight recorded in Bmi object of String type.
      *
      * @return The weight recorded in the Bmi object.
      */
@@ -86,7 +87,7 @@ public class Bmi extends Health {
     }
 
     /**
-     * Returns date recorded in Bmi object.
+     * Retrieves date recorded in Bmi object of LocalDate type.
      *
      * @return The date recorded in the Bmi object.
      */
@@ -96,7 +97,7 @@ public class Bmi extends Health {
 
     //@@author j013n3
     /**
-     * Calculates Bmi based on height and weight.
+     * Calculates the Bmi value based on height and weight.
      *
      * @return The calculated Bmi value.
      * @throws AssertionError If calculated value is not positive.
@@ -132,9 +133,9 @@ public class Bmi extends Health {
     }
 
     /**
-     * Returns a string containing calculated Bmi value and its corresponding category.
+     * Returns the string presentation of a Bmi object.
      *
-     * @return A string of Bmi object.
+     * @return A formatted string representing a Bmi object.
      */
     @Override
     public String toString() {

@@ -1,0 +1,53 @@
+@startuml
+actor User
+participant Handler as Handler << Class >>
+participant Parser as Parser << Class >>
+participant HealthList as "PeriodList: HealthList"
+participant Period as Period << Class >>
+
+User -> Handler : userInput
+activate Handler #FFBBBB
+Handler -> Handler : processInput()
+activate Handler #Salmon
+Handler -> Handler : handleHealth()
+activate Handler #DarkSalmon
+Handler -> Parser  : extractSubstringFromSpecificIndex()
+activate Parser  #FFBBBB
+Parser  --> Handler : typeOfHealth
+deactivate Parser  #FFBBBB
+
+Handler -> Parser : parsePredictionInput
+activate Parser  #FFBBBB
+
+Parser -> HealthList : getPeriodSize
+activate HealthList #FFBBBB
+HealthList --> Parser : size
+deactivate HealthList #FFBBBB
+deactivate Handler #FFBBBB
+
+Parser -> HealthList : printLatestThreeCycles
+activate HealthList  #FFBBBB
+HealthList --> Parser
+deactivate HealthList  #FFBBBB
+
+Parser -> HealthList : predictNextPeriodStartDate
+activate HealthList  #FFBBBB
+HealthList -> ":Period" : nextCyclePrediction
+activate ":Period" #FFBBBB
+":Period" -> ":Period" : getLastThreeCycleLengths
+activate ":Period" #DarkSalmon
+":Period" --> ":Period" : sumOfCycleLengths
+deactivate ":Period" #DarkSalmon
+
+":Period" --> HealthList : predicted start date
+deactivate ":Period" #FFBBBB
+HealthList --> Parser : predicted start date
+deactivate HealthList  #FFBBBB
+
+Parser -> Period : printNextCyclePrediction
+activate Period  #FFBBBB
+Period --> User :
+deactivate Period #FFBBBB
+
+
+@enduml

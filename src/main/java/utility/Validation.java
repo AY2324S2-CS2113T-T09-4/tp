@@ -188,7 +188,7 @@ public class Validation {
      */
     public static void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
         if (!time.matches(UiConstant.VALID_TIME_REGEX)) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_TIME_ERROR);
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ACTUAL_TIME_ERROR);
         }
         String [] parts = time.split(UiConstant.SPLIT_BY_COLON);
         int hours = Integer.parseInt(parts[0]);
@@ -218,6 +218,7 @@ public class Validation {
         int hours = WorkoutConstant.NO_HOURS_PRESENT;
         int minutes;
         int seconds;
+        boolean isHoursPresent = false;
 
         if (parts.length == WorkoutConstant.NUMBER_OF_PARTS_FOR_RUN_TIME) {
             minutes = Integer.parseInt(parts[0]);
@@ -226,19 +227,32 @@ public class Validation {
             hours = Integer.parseInt(parts[0]);
             minutes = Integer.parseInt(parts[1]);
             seconds = Integer.parseInt(parts[2]);
+            isHoursPresent = true;
         } else {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_RUN_TIME_ERROR);
         }
-        if (minutes <= UiConstant.MIN_MINUTES || minutes >= UiConstant.MAX_MINUTES) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_MINUTE_ERROR);
-        }
 
-        if (seconds <= UiConstant.MIN_SECONDS || seconds >= UiConstant.MAX_SECONDS) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_SECOND_ERROR);
-        }
 
         if (hours == UiConstant.MIN_HOURS) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HOUR_ERROR);
+        }
+
+        if (isHoursPresent) {
+            if (minutes > UiConstant.MAX_MINUTES) {
+                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_MINUTE_ERROR);
+            }
+
+            if (seconds > UiConstant.MAX_SECONDS) {
+                throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_SECOND_ERROR);
+            }
+        }
+        // hour is not present
+        if (minutes > UiConstant.MAX_MINUTES) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_MINUTE_ERROR);
+        }
+
+        if (seconds < UiConstant.MIN_SECONDS || seconds > UiConstant.MAX_SECONDS) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_SECOND_ERROR);
         }
     }
     //@@author
@@ -247,6 +261,7 @@ public class Validation {
      *
      * @param appointmentDetails List of strings representing Appointment details.
      * @throws CustomExceptions.InvalidInput If there are any errors in the details entered.
+     * @throws CustomExceptions.InsufficientInput If date, time, or description parameters are missing.
      */
     public static void validateAppointmentDetails(String[] appointmentDetails)
             throws CustomExceptions.InvalidInput, CustomExceptions.InsufficientInput {

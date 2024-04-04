@@ -145,6 +145,8 @@ public class Parser {
      * Parses input for Bmi command. Adds Bmi object to HealthList if valid.
      *
      * @param userInput The user input string.
+     * @throws CustomExceptions.InvalidInput      If input is invalid.
+     * @throws CustomExceptions.InsufficientInput If the height, weight or date parameters are missing.
      */
     public static void parseBmiInput(String userInput) throws CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput {
@@ -187,6 +189,8 @@ public class Parser {
      * Parses input for Period command. Adds Period object to HealthList if valid.
      *
      * @param userInput The user input string.
+     * @throws CustomExceptions.InvalidInput      If input is invalid.
+     * @throws CustomExceptions.InsufficientInput If the start date or end date parameters are missing.
      */
     public static void parsePeriodInput(String userInput) throws CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput {
@@ -263,6 +267,8 @@ public class Parser {
      * Parses input for Appointment command. Adds Appointment object to HealthList if valid.
      *
      * @param userInput The user input string.
+     * @throws CustomExceptions.InvalidInput      If input is invalid.
+     * @throws CustomExceptions.InsufficientInput If the date, time or description parameters are missing.
      */
     public static void parseAppointmentInput(String userInput) throws CustomExceptions.InvalidInput,
             CustomExceptions.InsufficientInput {
@@ -324,6 +330,8 @@ public class Parser {
      * Parses input for the Gym command. Adds Gym object if valid.
      *
      * @param userInput The user input string.
+     * @throws CustomExceptions.InvalidInput      If input is invalid.
+     * @throws CustomExceptions.InsufficientInput If number of station parameter is missing.
      */
     public static void parseGymInput(String userInput) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
@@ -368,6 +376,8 @@ public class Parser {
      * Parses input for the Run command. Adds a Run object if valid.
      *
      * @param input The user input string.
+     * @throws CustomExceptions.InvalidInput      If input is invalid.
+     * @throws CustomExceptions.InsufficientInput If the run time or run distance parameters are missing.
      */
     public static void parseRunInput(String input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
@@ -421,6 +431,7 @@ public class Parser {
     /**
      * Splits the Gym File Input that comes from Storage.
      * Validates the numberOfStation and Date input.
+     *
      * @param input The user input string.
      * @return String[] containing the gym details
      * @throws CustomExceptions.FileReadError If the file cannot be read.
@@ -477,6 +488,7 @@ public class Parser {
      * This method is used in the {@code parseGymFileInput} method.
      * How the method works is that it will check if the station details are valid
      * and then add the station to the gym.
+     *
      * @param gym the gym object that the station will be added to
      * @param gymDetails the array of strings containing the gym details
      * @param baseCounter the base counter to start adding the station
@@ -574,6 +586,5 @@ public class Parser {
         }
         return gym;
     }
-    //@@author
 
 }

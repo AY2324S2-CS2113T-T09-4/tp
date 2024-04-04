@@ -1,5 +1,9 @@
 package constants;
 
+/**
+ * HealthConstant class contains constants related to health-related functionalities in the application.
+ * It includes headers, flags, parameters, thresholds, formatted strings/messages, and split indices.
+ */
 public class HealthConstant {
 
     // Headers
@@ -39,6 +43,7 @@ public class HealthConstant {
     public static final String OVERWEIGHT_MESSAGE = "You're overweight.";
     public static final String OBESE_MESSAGE = "You're obese.";
     public static final String SEVERELY_OBESE_MESSAGE = "You're severely obese.";
+    public static final String BMI_HISTORY_HEADER = "Your BMI history:";
 
     // PERIOD
     public static final String PRINT_PERIOD_FORMAT = "Period Start: %s Period End: %s"
@@ -52,6 +57,7 @@ public class HealthConstant {
     public static final String LOG_DELETE_PERIOD_FORMAT = "Removed period entry with start date: %s and end date: %s";
     public static final String PERIOD_ADDED_MESSAGE_PREFIX = "Added: period | ";
     public static final String PERIOD_REMOVED_MESSAGE_PREFIX = "Removed period with index: ";
+    public static final String PERIOD_HISTORY_HEADER = "Your Period history:";
 
     // PREDICTION
     public static final String PRINT_CYCLE_FORMAT = "Cycle Length: %d days";
@@ -70,6 +76,7 @@ public class HealthConstant {
     public static final String APPOINTMENT_ADDED_MESSAGE_PREFIX = "Added: appointment | ";
     public static final String APPOINTMENT_REMOVED_MESSAGE_PREFIX = "Removed appointment with index: ";
     public static final Integer MAX_DESCRIPTION_LENGTH = 100;
+    public static final String APPOINTMENT_HISTORY_HEADER = "Your Appointment history:";
 
     // SPLIT INDEX
     public static final int BMI_HEIGHT_INDEX = 0;

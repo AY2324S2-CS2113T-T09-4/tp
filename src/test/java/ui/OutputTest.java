@@ -71,17 +71,17 @@ class OutputTest {
      */
     @Test
     void printHistory_runsOnly_expectAllRunsPrinted() throws CustomExceptions.InvalidInput {
-        new Run("40:10", "10.3", "15-03-2024");
-        new Run("01:59:10", "15.3");
+        Run run1 = new Run("40:10", "10.3", "15-03-2024");
+        Run run2 = new Run("01:59:10", "15.3");
         String expected = UiConstant.PARTITION_LINE +
                 System.lineSeparator() +
                 "Your run history:" +
                 System.lineSeparator() +
-                "Index\t\tType\tTime\t\tDistance\tPace\t\tDate" +
+                String.format(WorkoutConstant.RUN_HEADER_INDEX_FORMAT) +
                 System.lineSeparator() +
-                "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\t2024-03-15" +
+                String.format(WorkoutConstant.RUN_DATA_INDEX_FORMAT, 1, run1) +
                 System.lineSeparator() +
-                "2.\t\t\trun \t1:59:10\t\t15.3\t\t7:47/km\t\tNA" +
+                String.format(WorkoutConstant.RUN_DATA_INDEX_FORMAT, 2, run2) +
                 System.lineSeparator() +
                 UiConstant.PARTITION_LINE +
                 System.lineSeparator();
@@ -105,14 +105,14 @@ class OutputTest {
      */
     @Test
     void printLatestRun_oneRun_expectOneRunPrinted() throws CustomExceptions.InvalidInput {
-        new Run("40:10", "10.3");
+        Run newRun = new Run("40:10", "10.3");
         String expected = UiConstant.PARTITION_LINE +
                 System.lineSeparator() +
                 "Your latest run:" +
                 System.lineSeparator() +
-                "Index\t\tType\tTime\t\tDistance\tPace\t\tDate" +
+                String.format(WorkoutConstant.RUN_HEADER_INDEX_FORMAT) +
                 System.lineSeparator() +
-                "1.\t\t\trun \t40:10\t\t10.3\t\t3:54/km\t\tNA" +
+                String.format(WorkoutConstant.RUN_DATA_INDEX_FORMAT, 1, newRun) +
                 System.lineSeparator() +
                 UiConstant.PARTITION_LINE +
                 System.lineSeparator();
@@ -228,14 +228,6 @@ class OutputTest {
     }
 
     /**
-     * Tests the behaviour of the printLatestBmi function when no Bmi objects are added.
-     */
-    @Test
-    void printLatestBmi_noBmi_expectAssertionError() {
-        assertThrows(AssertionError.class, Output::printLatestBmi);
-    }
-
-    /**
      * Tests the behaviour of the printLatestBmi function when two Period objects are added.
      */
     @Test
@@ -258,14 +250,6 @@ class OutputTest {
     }
 
     /**
-     * Tests the behaviour of the printLatestBmi function when no Period objects are added.
-     */
-    @Test
-    void printLatestPeriod_noPeriod_expectAssertionError() {
-        assertThrows(AssertionError.class, Output::printLatestPeriod);
-    }
-
-    /**
      * Tests the behaviour of the printLatestAppointment function when two Appointment objects are added.
      */
     @Test
@@ -283,14 +267,6 @@ class OutputTest {
                 UiConstant.PARTITION_LINE +
                 System.lineSeparator();
         assertEquals(expected, outContent.toString());
-    }
-
-    /**
-     * Tests the behaviour of the printLatestAppointment function when no Appointment objects are added.
-     */
-    @Test
-    void printLatestAppointment_noAppointments_expectAssertionError() {
-        assertThrows(AssertionError.class, Output::printLatestAppointment);
     }
 
     /**

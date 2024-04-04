@@ -1,0 +1,44 @@
+@startuml
+skinparam sequenceReferenceBackgroundColor lightblue
+actor User
+participant Handler as Handler << Class >>
+participant Parser as Parser << Class >>
+participant Output as Output << Class >>
+participant "AppointmentList:HealthList" as AppointmentList
+
+User -> Handler: userInput
+activate Handler #FFBBBB
+Handler -> Handler : processInput()
+activate Handler #Salmon
+Handler -> Handler : handleHealth()
+
+activate Handler #DarkSalmon
+Handler -> Parser  : extractSubstringFromSpecificIndex()
+activate Parser  #FFBBBB
+Parser  --> Handler : typeOfHealth
+deactivate Parser  #FFBBBB
+
+Handler -> Parser : parseAppointmentInput()
+activate Parser  #FFBBBB
+deactivate Handler #DarkSalmon
+Parser -> Parser : splitAppointmentDetails()
+ref over Parser: validateAppointmentDetails
+
+activate Parser  #DarkSalmon
+Parser --> Parser : appointmentDetails
+deactivate Parser  #DarkSalmon
+
+Parser -> ":Appointment" **: new
+activate ":Appointment" #FFBBBB
+":Appointment" --> Parser: newAppointment:Appointment
+deactivate ":Appointment" #FFBBBB
+Parser -> AppointmentList : addAppointment()
+activate AppointmentList  #FFBBBB
+AppointmentList --> Parser :
+deactivate AppointmentList  #FFBBBB
+
+Parser -> Output : printAddAppointment()
+activate Output #FFBBBB
+Output --> User:
+deactivate Output #FFBBBB
+@enduml

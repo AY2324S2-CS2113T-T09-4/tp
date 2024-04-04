@@ -19,6 +19,9 @@ import utility.Filters.HistoryAndLatestFilters;
 
 import java.util.ArrayList;
 
+/**
+ * The Output class handles printing various messages, data, and ASCII art for the user interface.
+ */
 public class Output {
 
     /**
@@ -156,6 +159,9 @@ public class Output {
     /**
      * Prints all Workout objects (Run and Gym) based on the time it was added.
      * The list is sorted in descending order. (Latest one first)
+     *
+     * @throws CustomExceptions.OutOfBounds  If index is out of bounds.
+     * @throws CustomExceptions.InvalidInput If user input is invalid.
      */
     protected static void printWorkoutHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
@@ -198,7 +204,8 @@ public class Output {
         printLine();
         System.out.println("Your run history:");
         ArrayList<? extends Workout> workoutList = WorkoutList.getWorkouts(WorkoutConstant.RUN);
-        System.out.println(WorkoutConstant.RUN_HEADER_INDEX_FORMAT);
+        String runHeader = String.format(WorkoutConstant.RUN_HEADER_INDEX_FORMAT);
+        System.out.println(runHeader);
 
         for (int i = 0; i < workoutList.size(); i++) {
             int index = i + 1;
@@ -251,8 +258,11 @@ public class Output {
      */
     protected static void printBmiHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
-        System.out.println("Your BMI history:");
-        HealthList.showBmiHistory();
+        try {
+            HealthList.showBmiHistory();
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
         printLine();
     }
 
@@ -264,8 +274,11 @@ public class Output {
      */
     protected static void printPeriodHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
-        System.out.println("Your Period history:");
-        HealthList.showPeriodHistory();
+        try {
+            HealthList.showPeriodHistory();
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
         printLine();
     }
 
@@ -277,8 +290,11 @@ public class Output {
      */
     protected static void printAppointmentHistory() throws CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
         printLine();
-        System.out.println("Your Appointment history:");
-        HealthList.showAppointmentList();
+        try {
+            HealthList.showAppointmentList();
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
         printLine();
     }
 
@@ -323,7 +339,11 @@ public class Output {
      */
     protected static void printLatestBmi() {
         printLine();
-        HealthList.showCurrentBmi();
+        try {
+            HealthList.showCurrentBmi();
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
         printLine();
     }
 
@@ -332,7 +352,11 @@ public class Output {
      */
     protected static void printLatestPeriod() {
         printLine();
-        HealthList.showLatestPeriod();
+        try {
+            HealthList.showLatestPeriod();
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
         printLine();
     }
 
@@ -341,7 +365,11 @@ public class Output {
      */
     protected static void printLatestAppointment(){
         printLine();
-        HealthList.showLatestAppointment();
+        try {
+            HealthList.showLatestAppointment();
+        } catch (CustomExceptions.OutOfBounds e) {
+            System.out.println(e.getMessage());
+        }
         printLine();
     }
 

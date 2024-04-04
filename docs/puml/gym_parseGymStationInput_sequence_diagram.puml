@@ -1,0 +1,51 @@
+@startuml
+mainframe **sd** parseGymStationInput
+participant Parser as Parser << Class >>
+participant Output as Output << Class >>
+participant Handler as Handler << Class >>
+participant Validation as Validation << Class >>
+participant Gym as Gym
+
+activate Parser  #FFBBBB
+Parser -> Parser : parseGymStationInput()
+    activate Parser #DarkSalmon
+        loop until i == number of stations
+        Parser -> Output : printGymStationPrompt()
+        activate Output #FFBBBB
+        Output --> Parser : 
+        deactivate Output #DarkSalmon
+        Parser -> Handler: in.nextLine()
+        activate Handler #FFBBBB
+        Handler --> Parser:
+        deactivate Handler #FFBBBB
+        Parser -> Validation: splitAndValidateGymStationInput()
+        activate Validation #FFBBBB
+        alt #LightBlue Valid Input
+            Validation --> Parser:
+        else #LightPink Insufficient Input
+            Validation --> Parser: InsufficientInputException
+        else #LightPink Invalid Input
+            Validation --> Parser: InvalidInputException
+        end
+        deactivate Validation #FFBBBB
+        Parser -> Validation: validateWeightsArray()
+        activate Validation #FFBBBB
+        alt #LightBlue Valid Input
+            Validation --> Parser:
+        else #LightPink Invalid Input
+            Validation --> Parser: InvalidInputException
+        end
+        deactivate Validation #FFBBBB
+        Parser -> Gym: addGymStation() 
+        note right : Using the same gym object that has been created in Parser
+        activate Gym #FFBBBB
+        Gym -> Gym : appendIntoStations()
+        activate Gym #Salmon
+        Gym --> Gym : 
+        deactivate Gym #Salmon
+        Gym --> Parser:
+        deactivate Gym #FFBBBB
+        end
+    Parser --> Parser :  
+deactivate Parser #DarkSalmon
+@enduml

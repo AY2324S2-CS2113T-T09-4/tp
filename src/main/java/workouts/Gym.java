@@ -46,7 +46,7 @@ public class Gym extends Workout {
                            ArrayList<Integer> weightsList) throws CustomExceptions.InvalidInput {
         try {
             GymStation newStation = new GymStation(name, numberOfSet, numberOfRepetitions, weightsList);
-            stations.add(newStation);
+            appendIntoStations(newStation);
         } catch (Exception e) {
             throw new CustomExceptions.InvalidInput(WorkoutConstant.INVALID_GYM_INPUT);
         }
@@ -60,6 +60,10 @@ public class Gym extends Workout {
     public ArrayList<GymStation> getStations() {
 
         return stations;
+    }
+
+    public void appendIntoStations(GymStation station) {
+        stations.add(station);
     }
 
     public GymStation getStationByIndex(int index) throws CustomExceptions.OutOfBounds {

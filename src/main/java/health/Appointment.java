@@ -41,9 +41,9 @@ public class Appointment extends Health {
     }
 
     /**
-     * Retrieves the date of the appointment.
+     * Retrieves the date of the appointment of LocalDate type.
      *
-     * @return The date of appointment in LocalDate.
+     * @return The date of appointment.
      */
     public LocalDate getDate() {
         assert date != null : ErrorConstant.NULL_DATE_ERROR;
@@ -51,9 +51,9 @@ public class Appointment extends Health {
     }
 
     /**
-     * Retrieves the time of the appointment.
+     * Retrieves the time of the appointment of LocalTime type.
      *
-     * @return The time of appointment in LocalTime.
+     * @return The time of appointment.
      */
     public LocalTime getTime() {
         assert time != null : ErrorConstant.NULL_TIME_ERROR;
@@ -61,16 +61,16 @@ public class Appointment extends Health {
     }
 
     /**
-     * Retrieves the description of the appointment.
+     * Retrieves the description of the appointment of String type.
      *
-     * @return The description of appointment in String.
+     * @return The description of appointment.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Retrieves the string representation of an Appointment object.
+     * Returns the string representation of an Appointment object.
      *
      * @return A formatted string representing an Appointment object.
      */

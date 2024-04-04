@@ -1,0 +1,47 @@
+@startuml
+skinparam sequenceReferenceBackgroundColor lightblue
+actor User
+participant Handler as Handler << Class >>
+participant Parser as Parser << Class >>
+participant Output as Output << Class >>
+participant ":Run" as Run
+participant ":WorkoutList" as WorkoutList
+
+User -> Handler: userInput
+activate Handler #FFBBBB
+Handler -> Handler : processInput()
+activate Handler #Salmon
+Handler --> Handler : handleWorkout()
+activate Handler #DarkSalmon
+Handler -> Parser  : extractSubstringFromSpecificIndex()
+activate Parser  #FFBBBB
+Parser  --> Handler : typeOfWorkout()
+deactivate Parser  #FFBBBB
+
+Handler -> Parser : parseRunInput()
+activate Parser  #FFBBBB
+deactivate Handler #DarkSalmon
+
+Parser -> Parser : splitRunInput()
+ref over Parser: validateRunInput
+activate Parser  #DarkSalmon
+Parser --> Parser : runDetails
+deactivate Parser  #DarkSalmon
+Parser -> Run: new
+activate Run #FFBBBB
+Run -> WorkoutList: addRun()
+activate WorkoutList #FFBBBB
+WorkoutList -> WorkoutList: addWorkout()
+activate WorkoutList #DarkSalmon
+WorkoutList --> WorkoutList
+deactivate WorkoutList #DarkSalmon
+WorkoutList --> Run
+deactivate WorkoutList #FFBBBB
+Run --> Parser: newRun:Run
+deactivate Run #FFBBBB
+
+Parser -> Output : printAddRun()
+activate Output #FFBBBB
+Output --> User:
+deactivate Output #FFBBBB
+@enduml

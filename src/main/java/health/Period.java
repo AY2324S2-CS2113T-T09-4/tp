@@ -10,7 +10,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
- * Represents a Period object to track user's menstrual cycle.
+ * The Period class extends the Health class.
+ * It contains information about the start date, end date, time, period length, and cycle length of the period,
+ * and the functionalities to calculate period and cycle length and predict the next period.
  */
 public class Period extends Health {
     /**
@@ -35,7 +37,7 @@ public class Period extends Health {
 
     //@@author syj02
     /**
-     * Constructs a Period object with the given start and end dates in string format.
+     * Constructor for Period object.
      *
      * @param stringStartDate A string representing the start date of the period.
      * @param stringEndDate   A string representing the end date of the period.
@@ -48,7 +50,7 @@ public class Period extends Health {
     }
 
     /**
-     * Retrieves the start date of the period.
+     * Retrieves the start date of the period of LocalDate type.
      *
      * @return The start date of period.
      * @throws AssertionError if the start date is null.
@@ -59,7 +61,7 @@ public class Period extends Health {
     }
 
     /**
-     * Retrieves the end date of the period.
+     * Retrieves the end date of the period of LocalDate type.
      *
      * @return The end date of period.
      * @throws AssertionError if the end date is null.
@@ -70,7 +72,7 @@ public class Period extends Health {
     }
 
     /**
-     * Retrieves the length of the period.
+     * Retrieves the length of the period of long type.
      *
      * @return The period length.
      */
@@ -159,7 +161,7 @@ public class Period extends Health {
     }
 
     /**
-     * Retrieves the string representation of a Period object.
+     * Returns the string representation of a Period object.
      *
      * @return A formatted string representing a Period object.
      */

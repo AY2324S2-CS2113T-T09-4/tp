@@ -98,7 +98,7 @@ class BmiTest {
      * Tests the behaviour of showCurrentBmi.
      */
     @Test
-    void showCurrentBmi_bmiObject_printsCorrectCurrentBmi() {
+    void showCurrentBmi_bmiObject_printsCorrectCurrentBmi() throws CustomExceptions.OutOfBounds {
         Bmi bmi = new Bmi("1.75", "70.00", "19-03-2024");
         HealthList.addBmi(bmi);
 
@@ -117,14 +117,16 @@ class BmiTest {
      * Test the behaviour of printing Bmi history.
      */
     @Test
-    void showBmiHistory_twoBmiObjects_printsCorrectBmiHistory() {
+    void showBmiHistory_twoBmiObjects_printsCorrectBmiHistory() throws CustomExceptions.OutOfBounds {
         Bmi firstBmi = new Bmi("1.75", "80.0", "20-03-2024");
         Bmi secondBmi = new Bmi("1.80", "74.0", "21-03-2024");
 
         HealthList.addBmi(firstBmi);
         HealthList.addBmi(secondBmi);
 
-        String expected = "2024-03-20"
+        String expected = "Your BMI history:"
+                + System.lineSeparator()
+                + "2024-03-20"
                 + System.lineSeparator()
                 + "Your BMI is 26.12"
                 + System.lineSeparator()

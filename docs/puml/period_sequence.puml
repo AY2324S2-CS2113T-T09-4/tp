@@ -1,0 +1,45 @@
+@startuml
+skinparam sequenceReferenceBackgroundColor lightblue
+actor User
+participant Handler as Handler << Class >>
+participant Parser as Parser << Class >>
+participant Output as Output << Class >>
+participant "PeriodList:HealthList" as PeriodList
+
+User -> Handler: userInput
+activate Handler #FFBBBB
+Handler -> Handler : processInput()
+activate Handler #Salmon
+Handler -> Handler : handleHealth()
+
+activate Handler #DarkSalmon
+Handler -> Parser  : extractSubstringFromSpecificIndex()
+activate Parser  #FFBBBB
+Parser  --> Handler : typeOfHealth
+deactivate Parser  #FFBBBB
+
+Handler -> Parser : parsePeriodInput()
+activate Parser  #FFBBBB
+deactivate Handler #DarkSalmon
+Parser -> Parser : splitPeriodInput()
+ref over Parser: validatePeriodInput
+
+activate Parser  #DarkSalmon
+Parser --> Parser : periodDetails
+deactivate Parser  #DarkSalmon
+
+Parser -> ":Period" **: new
+activate ":Period" #FFBBBB
+":Period" --> Parser: newPeriod:Period
+deactivate ":Period" #FFBBBB
+Parser -> PeriodList : addPeriod()
+activate PeriodList  #FFBBBB
+PeriodList --> Parser :
+deactivate PeriodList  #FFBBBB
+
+Parser -> Output : printAddPeriod()
+activate Output #FFBBBB
+Output --> User:
+deactivate Output #FFBBBB
+@enduml
+

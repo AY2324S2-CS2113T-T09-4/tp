@@ -1,0 +1,63 @@
+@startuml
+skinparam sequenceReferenceBackgroundColor lightblue
+actor User
+participant Handler as Handler << Class >>
+participant Parser as Parser << Class >>
+participant Gym as Gym 
+participant ":WorkoutList" as WorkoutList
+
+User -> Handler: userInput
+activate Handler #FFBBBB
+Handler -> Handler : processInput()
+activate Handler #Salmon
+Handler -> Handler : handleWorkout()
+
+activate Handler #DarkSalmon
+Handler -> Parser  : extractSubstringFromSpecificIndex()
+activate Parser  #FFBBBB
+Parser  --> Handler : typeOfWorkout:String
+deactivate Parser  #FFBBBB
+
+Handler -> Parser : parseGymInput()
+activate Parser  #FFBBBB
+Parser -> Parser : splitGymInput()
+activate Parser #Salmon
+Parser --> Parser : gymDetails
+deactivate Parser #Salmon
+ref over Parser: validateGymInput
+alt #LightBlue date exists
+    create Gym
+    Parser -> Gym : new(date)
+    activate Gym #Salmon
+    Gym -> WorkoutList : addGym()
+    activate WorkoutList #FFBBBB
+    WorkoutList -> WorkoutList : addWorkout()
+    activate WorkoutList #Salmon
+    WorkoutList --> WorkoutList
+    deactivate WorkoutList #Salmon
+    WorkoutList --> Gym #FFBBBB
+    deactivate WorkoutList #FFBBBB
+    Gym --> Parser
+    deactivate Gym #Salmon
+
+else #LightPink date does not exist
+    create Gym
+    Parser -> Gym : new()
+     activate Gym #Salmon
+    Gym -> WorkoutList : addGym()
+    activate WorkoutList #FFBBBB
+    WorkoutList -> WorkoutList : addWorkout()
+    activate WorkoutList #Salmon
+    WorkoutList --> WorkoutList
+    deactivate WorkoutList #Salmon
+    WorkoutList --> Gym #FFBBBB
+    deactivate WorkoutList #FFBBBB
+    Gym --> Parser
+    deactivate Gym #Salmon
+end
+ref over Parser : parseGymStationInput()
+Parser --> Handler 
+deactivate Parser #FFBBBB
+destroy Gym
+@enduml
+

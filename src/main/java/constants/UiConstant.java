@@ -3,7 +3,9 @@ package constants;
 import java.io.File;
 
 /**
- * Constants class representing all constants used for PulsePilot.
+ * UiConstants class contains constants related to user-interaction-related functionalities in the application.
+ * It includes constants for special characters, regular expressions, UI replies, storage paths,
+ * numerical values, history management, delete operations, and split indices.
  */
 public class UiConstant {
 
@@ -39,6 +41,7 @@ public class UiConstant {
     public static final String NAME_LABEL = "NAME";
     public static final String LOG_FILE_PATH = "./pulsepilot_log.txt";
     public static final String DATA_FILE_PATH = "./pulsepilot_data.txt";
+    public static final String HASH_FILE_PATH = "./pulsepilot_hash.txt";
     public static final File SAVE_FILE = new File(UiConstant.DATA_FILE_PATH);
     public static final int FILE_FOUND = 0;
     public static final int FILE_NOT_FOUND = 1;

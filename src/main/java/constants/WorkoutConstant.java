@@ -1,5 +1,10 @@
 package constants;
 
+/**
+ * WorkoutConstants class contains constants related to workout-related functionalities in the application.
+ * It includes constants for workout types, flags, parameters, indices, file loading, history display,
+ * and formatted strings.
+ */
 public class WorkoutConstant {
 
     // Workout Delimiter
@@ -42,6 +47,8 @@ public class WorkoutConstant {
     public static final String RUN = "run";
     public static final String GYM = "gym";
     public static final String ALL = "workouts";
+    public static final String TWO_DECIMAL_PLACE_FORMAT = "%.2f";
+    public static final String TWO_DIGIT_PLACE_FORMAT = "%02d";
 
     // GYM FILE LOADING CONSTANTS
     public static final int GYM_FILE_INDEX = 0;
@@ -64,9 +71,11 @@ public class WorkoutConstant {
     public static final String HISTORY_WORKOUTS_DATA_HEADER_FORMAT = "%-6s\t%s";
 
     // Formatted Strings/Messages
-    public static final String RUN_DATA_FORMAT = "%s \t%s\t\t%s\t\t%s\t\t%s";
-    public static final String RUN_DATA_INDEX_FORMAT = "%d.\t\t\t%s";
-    public static final String RUN_HEADER_INDEX_FORMAT = "Index\t\tType\tTime\t\tDistance\tPace\t\tDate";
+    public static final String RUN_DATA_FORMAT = "%-6s\t%-10s\t%-10s\t%-10s\t%-12s";
+    public static final String RUN_DATA_INDEX_FORMAT = "%-6d\t%-6s";
+
+    public static final String RUN_HEADER_INDEX_FORMAT = String.format("%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-12s",
+            "Index", "Type", "Time", "Distance", "Pace", "Date");
     public static final String GYM_STATION_FORMAT = "%s: ";
     public static final String GYM_SET_FORMAT = "%d reps at %d KG";
     public static final String GYM_SET_INDEX_FORMAT = "\t- Set %d. %s";

@@ -3,7 +3,7 @@ package health;
 import java.time.LocalDate;
 
 /**
- * Represents a Health object to track user's health information.
+ * The Health class represents a Health object to track user's health information.
  */
 public class Health {
     /**
@@ -18,9 +18,9 @@ public class Health {
     }
 
     /**
-     * Retrieves the date of Health object.
+     * Retrieves the date of Health object of LocalDate type.
      *
-     * @return The date of the Health object of LocalDate type.
+     * @return The date of the Health object.
      */
     public LocalDate getDate() {
         return date;
@@ -29,7 +29,7 @@ public class Health {
     /**
      * Returns a string containing the date of the Health object.
      *
-     * @return A string of Health object.
+     * @return A formatted string representing a Health object.
      */
     @Override
     public String toString(){
