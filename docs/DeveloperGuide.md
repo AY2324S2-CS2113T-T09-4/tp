@@ -7,7 +7,7 @@
 * [Acknowledgements](#acknowledgements)
 * [Introduction](#introduction)
 * [Design](#design)
-* [Implementation of Commands](#commands-and-implementation)
+* [Commands and Implementation](#commands-and-implementation)
 * [Appendix: DG Requirements](#appendix-requirements)
     * [Product Scope](#target-user-profile)
     * [User Stories](#user-stories)
