@@ -14,21 +14,19 @@ Below is the breakdown of what I have done.
 
 - Implemented the `WorkoutList` class, to help track and manage newly created `Run` and `Gym` objects.
 
-- Implemented the `Workout`, `Gym`, `GymStation`, and `GymSet` class
-
+- Implemented the final `Workout`, `Gym`, `GymStation`, and `GymSet` classes.
 
 #### Enhancements Implemented
 
-- Implemented the `Parser.parseGymStationInput()` method, which interactively prompts users for their gym station details. This enhancement simplifies the process of adding new gym workouts by reducing the length of the required command.
+- Implemented the `Parser.parseGymStationInput()` method, taking gym station input from the user.
 
-- Assisted with `Storage` through the implementation of the `Gym.toFileString()` and `Parser.parseGymFileInput()` allowing [@L5-Z](https://github.com/L5-Z) to easily integrate the saving/loading of Gym classes.
+- Assisted with `Storage` through the implementation of the `Gym.toFileString()` and `Parser.parseGymFileInput()`, allowing [@L5-Z](https://github.com/L5-Z) to easily integrate the saving/loading of Gym classes.
 
-- Refactored Static Methods into Non-Static Methods where Instances are used instead to adopt a more Object-Oriented approach. 
+- Refactored static methods into non-static methods where instances are used instead to adopt a more Object-Oriented approach.
 
-- Wrote Integration Test cases for the `Health` package supported with the `TestHelper` package to simulate end-to-end testing.
+- Wrote integration test cases for the `Health` package supported with the `TestHelper` package to simulate end-to-end testing.
 
-- Wrote Unit Test cases for the `Gym`, `GymStation`, `WorkoutList`, `Output`, and `Parser` to help increase coverage.
-
+- Wrote test cases for the `Gym`, `GymStation`, `WorkoutList`, `Output`, and `Parser` to help increase coverage.
 
 #### Documentation Written
 
@@ -38,13 +36,13 @@ Below is the breakdown of what I have done.
 
 ##### Developer Guide
 
-- Wrote DG portion for the `Gym` and `GymStation` sections. 
-- Created Sequence Diagrams for `Gym` and `GymStation`.
+- Wrote DG portion for the `Gym` and `GymStation` sections.
+- Created sequence diagrams for `Gym` and `GymStation`.
 - Worked with [@rouvinerh](https://github.com/rouvinerh) to review sequence diagrams for `Run`, `Latest`, `History`, and `Handler` sections.
 
 #### Other Contributions
 
 ##### Project Management
 
-- Interfaced between [@L5_Z](https://github.com/L5-Z) and [@rouvinerh](https://github.com/rouvinerh) to integrate the `Handler` and `Storage` classes with the `Run` and `Gym` classes. 
-- Created a list of Integration Tests to perform to ensure better coverage. 
+- Liaised with [@L5_Z](https://github.com/L5-Z) and [@rouvinerh](https://github.com/rouvinerh) to integrate the `Handler` and `Storage` classes with the `Run` and `Gym` classes.
+- Created integration tests to ensure better coverage.

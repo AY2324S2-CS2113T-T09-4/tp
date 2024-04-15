@@ -39,7 +39,7 @@ Below is the breakdown of what I have done.
 
 - Wrote the skeletal structure of the UG for other team members to fill.
 - Replaced all expected output with images.
-- Wrote UG portion for Run, History and Delete.
+- Wrote UG portion for Run, History, Latest and Delete.
 
 ##### Developer Guide
 

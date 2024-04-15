@@ -24,7 +24,7 @@ Below is the breakdown of what I have done.
 
 #### Enhancements Implemented
 
-- Implemented the `Parser.extractSubstringFromSpecificIndex` method, which allows for flexible use case and implementation across all classes that require substring attached to relevant flags in order to function. Allows for flags and substrings to not be declared in order.  
+- Implemented the `Parser.extractSubstringFromSpecificIndex()` method, which allows for flexible use case and implementation across all classes that require substring attached to relevant flags in order to function. Allows for flags and substrings to not be declared in order.  
 
 - Implemented the `LogFile.getInstance()` allowing the team to instantiate a singular instance of LogFile to be used across all classes.
 
@@ -38,6 +38,7 @@ Below is the breakdown of what I have done.
 
 - Refactored long methods where applicable, and moved author tags around.
 
+- Wrote Integration Test cases for the bulk of `Handler` and `Datafile` classes.
 
 #### Documentation Written
 
@@ -46,12 +47,12 @@ Below is the breakdown of what I have done.
 
 - Reviewed and improved clarity of the language used in UG and ensured consistency throughout the document.
 - Replaced expected output with images.
-- Wrote UG portion for `Help`, `Exit`, Storage, Logging and FAQ.
+- Wrote UG portion for `Help`, `Exit`, `DataFile`(Storage), `Logging` and **FAQ**.
 
 
 ##### Developer Guide
 
-- Wrote DG portion for Storage and Handler.
+- Wrote DG portion for `DataFile`(Storage) and `Handler`.
 - Worked with [@rouvinerh](https://github.com/rouvinerh) to create sequence diagrams for Handler and DataFile.
 
 
@@ -61,5 +62,5 @@ Below is the breakdown of what I have done.
 
 - Helped to ensure that the dashboard icons for our team members and our team is green.
   - Worked with our TA and [@JustinSoh](https://github.com/JustinSoh) to resolve an issue with the dashboard's weekly requirement.
-- Interfaced between [@JustinSoh](https://github.com/JustinSoh) and [@rouvinerh](https://github.com/rouvinerh) to integrate the `Handler` and `DataFile` class with the `Run` and `Gym` classes.
-- Interfaced between [@syj02](https://github.com/syj02) and [@j013n3](https://github.com/j013n3) to integrate the `Handler` and `DataFile` class with the `Bmi`, `Period` and `Appointment` classes. 
+- Liaised between [@JustinSoh](https://github.com/JustinSoh) and [@rouvinerh](https://github.com/rouvinerh) to integrate the `Handler` and `DataFile` class with the `Run` and `Gym` classes.
+- Liaised between [@syj02](https://github.com/syj02) and [@j013n3](https://github.com/j013n3) to integrate the `Handler` and `DataFile` class with the `Bmi`, `Period` and `Appointment` classes. 

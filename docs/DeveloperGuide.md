@@ -778,11 +778,10 @@ Simultaneously, PulsePilot facilitates access to this vital data for various hea
 ##### Termination
 
 1. Exit PulsePilot using the `exit` command.
-2. A farewell message is printed as follows:
+2. A farewell message is printed as shown below:
+3. `pulsepilot_hash.txt` is created upon `exit`, and `pulsepilot_data.txt` will be written to. The `.lck` file from start up will be deleted as well.
 
 ![Shutdown](img/output/shutdown.png)
-
-3. `pulsepilot_hash.txt` is created upon `exit`, and `pulsepilot_data.txt` will be written to. The `.lck` file from start up will be deleted as well.
 
 ###### [Back to table of contents](#table-of-contents)
 
@@ -792,16 +791,16 @@ Simultaneously, PulsePilot facilitates access to this vital data for various hea
 
 **Adding a run:**
 
-1. Test Case: `workout /e:run /d:5.15 /t:25:00`
+- Test Case: `workout /e:run /d:5.15 /t:25:00`
     **Expected Result**: Run added. Successful adding message is printed.
 
-2. Test Case: `workout /e:run /d:15.15 /t:01:25:00 /date:25-02-2024`
+- Test Case: `workout /e:run /d:15.15 /t:01:25:00 /date:25-02-2024`
     **Expected Result**: Run added. Successful adding message is printed.
 
-3. Test Case: `workout /e:run /d:25.00 /t:00:25:00`
+- Test Case: `workout /e:run /d:25.00 /t:00:25:00`
     **Expected Result**: Run not added. Error message asking user to use `MM:SS` as hours cannot be `00` is printed in red.
 
-4. Test Case: `workout /e:run /d:30.00 /t:28:00`
+- Test Case: `workout /e:run /d:30.00 /t:28:00`
     **Expected Result**: Run not added. Error message stating that pace cannot be faster than `1.00/km` is printed in red.
 
 ###### [Back to table of contents](#table-of-contents)
@@ -814,7 +813,7 @@ Simultaneously, PulsePilot facilitates access to this vital data for various hea
 
 **Adding a gym:**
 
-1. Test Case:
+- Test Case:
 
 This test case for gym has **multiple lines of input**.
 
@@ -825,12 +824,11 @@ bench press /s:2 /r:4 /w:10,20
 
 **Expected Result**: Gym added successfully. Successful adding message is printed.
 
-2. Test Case: `workout /e:gym /n:0`
+- Test Case: `workout /e:gym /n:0`
 
     **Expected Result**: Gym not added. Error message stating that number of sets cannot be 0 is printed in red.
 
-
-3. Test Case:
+- Test Case:
 
 This test case for gym has **multiple lines of input**.
 
@@ -842,7 +840,7 @@ smith's press /s:1 /r:4 /w:10
 
 **Expected Result**: Gym not added. Error message stating that gym station name can only have letters, and gym station prompt for station 2 is printed again.
 
-4. Test Case:
+- Test Case:
 
 This test case for gym has **multiple lines of input**.
 
@@ -853,7 +851,7 @@ bench press /s:2 /r:4 /w:10
 
 **Expected Result**: Gym not added. Error message stating that number of weight values must be the same as the number of sets is printed in red.
 
-5. Test Case: 
+- Test Case:
 
 This test case for gym has **multiple lines of inputs**.
 
@@ -863,7 +861,7 @@ bench press /s:2 /r:4 /w:10,20
 back
 ```
 
-**Expected Results**: The `Gym` object was not added because the `back` command was invoked. A message will be displayed stating that the latest Gym object has been removed and you have been redirected to the main menu.
+**Expected Results**: The `Gym` object was not added because the `back` command was invoked. A message will be displayed stating that the latest Gym object has been removed, and you have been redirected to the main menu.
 
 ###### [Back to table of contents](#table-of-contents)
 
@@ -875,13 +873,13 @@ back
 
 **Adding a BMI:**
 
-1. Test Case: `health /h:bmi /height:1.70 /weight:70.00 /date:29-04-2023`
+- Test Case: `health /h:bmi /height:1.70 /weight:70.00 /date:29-04-2023`
     - **Expected Result**: BMI added successfully. Successful adding message is printed.
 
-2. Test Case: `health /h:bmi /height:1.70 /weight:0.00 /date:29-04-2023`
+- Test Case: `health /h:bmi /height:1.70 /weight:0.00 /date:29-04-2023`
     - **Expected Result**: BMI not added. Error message stating height and weight must be more than 0 is printed in red.
 
-3. Test Case: `health /h:bmi /height:100.00 /weight:50.00 /date:29-04-2023`
+- Test Case: `health /h:bmi /height:100.00 /weight:50.00 /date:29-04-2023`
     - **Expected Result**: BMI not added. Error message stating that the tallest human being ever was 2.72m and to specify a height less than 2.75m is printed in red.
 
 ###### [Back to table of contents](#table-of-contents)
@@ -894,13 +892,13 @@ back
 
 Note that PulsePilot's stored items are cleared after each test case for **period testing only**. This can be done using the `delete` command.
 
-1. Test Case: `health /h:period /start:10-03-2024 /end:17-03-2024`
+- Test Case: `health /h:period /start:10-03-2024 /end:17-03-2024`
     **Expected Result**: Period is added. Successful adding message is printed. Notification that period length is out of healthy range is printed in red.
 
-2. Test Case: `health /h:period /start:10-03-2024`
+- Test Case: `health /h:period /start:10-03-2024`
     **Expected Result**: Period is added. Successful adding message is printed with end date set to NA.
 
-3. Test Case:
+- Test Case:
 
 This test case for period has **multiple lines of input**.
 
@@ -912,8 +910,7 @@ health /h:period /start:10-04-2024 /end:16-04-2024
 
 **Expected Result**: Only 1 Period is added, with successful message printing twice. Error message stating that date specified cannot be later than today's date is printed in red.
 
-
-4. Test Case:
+- Test Case:
 
 This test case for period has **multiple lines of input**.
 
@@ -934,9 +931,7 @@ health /h:period /start:10-04-2024 /end:16-04-2024
 
 **Checking prediction with 4 valid periods added:**
 
-
-
-1. Test Case:
+- Test Case:
 
 This test case for prediction has **multiple lines of input**.
 
@@ -952,7 +947,7 @@ health /h:prediction
 
 **Checking prediction without 4 valid periods:**
 
-1. Test Case: `health /h:prediction`
+- Test Case: `health /h:prediction`
     **Expected Result**: Prediction not made. Error message stating that there are not enough period cycles recorded is printed in red.
 
 ###### [Back to table of contents](#table-of-contents)
@@ -962,12 +957,12 @@ health /h:prediction
 
 #### Appointment Testing
 
-Adding an appointment:
+**Adding an appointment:**
 
-1. Test Case: `health /h:appointment /date:19-03-2023 /description:surgery /time:19:00`
+- Test Case: `health /h:appointment /date:19-03-2023 /description:surgery /time:19:00`
     - **Expected Result**: Appointment added. Successful adding message is printed.
 
-2. Test Case `health /h:appointment /date:19-03-2023 /description:;;; /time:19:00`
+- Test Case `health /h:appointment /date:19-03-2023 /description:;;; /time:19:00`
     - **Expected Result**: Appointment not added. Error stating that description can only contain alphanumeric characters, spaces, inverted commas and quotes is printed.
 
 
@@ -979,15 +974,15 @@ Adding an appointment:
 
 #### History Testing
 
-Viewing History with 1 valid run and 1 valid gym:
+**Viewing History with 1 valid run and 1 valid gym:**
 
-1. Test Case: `history /item:workouts`
+- Test Case: `history /item:workouts`
     - **Expected Result**: Run and Gym information is printed.
 
 
-Viewing history with no valid objects:
+**Viewing history with no valid objects:**
 
-1. Test Case: `history /item:appointment`
+- Test Case: `history /item:appointment`
     - **Expected Result**: Error message stating that no appointments have been found is printed in red.
 
 ###### [Back to table of contents](#table-of-contents)
@@ -998,7 +993,7 @@ Viewing history with no valid objects:
 
 **Viewing Latest with 1 valid BMI entry and 1 valid run:**
 
-1. Test Case:
+- Test Case:
 
 This test case for latest has **multiple lines of input**.
 
@@ -1012,7 +1007,7 @@ latest /item:appointment
 
 **Viewing Latest with no invalid string:**
 
-1. Test Case: `latest /item:test`
+- Test Case: `latest /item:test`
     - **Expected Result**: Error message stating that invalid item has been specified is printed in red.
 
 ###### [Back to table of contents](#table-of-contents)
@@ -1023,7 +1018,7 @@ latest /item:appointment
 
 **Deleting a run:**
 
-1. Test Case:
+- Test Case:
 
 This test case for delete has **multiple lines of input**.
 
@@ -1036,7 +1031,7 @@ delete /item:run /index:1
 
 **Deleting gym that does not exist:**
 
-1. Test Case: `delete /item:gym /index:1`
+- Test Case: `delete /item:gym /index:1`
     **Expected Result**: Error message stating invalid index to delete is printed in red.
 
 
@@ -1050,21 +1045,21 @@ delete /item:run /index:1
 
 **PulsePilot placed in a directory where read and write permissions are given**:
 
-1. Test Case: Launching for first time:
+- Test Case: Launching for first time:
     **Expected Result**: Log file, log file lock and data file are created.
 
-2. Test Case: Missing hash file:
+- Test Case: Missing hash file:
     **Expected Result**: Error message stating key files for integrity are missing is printed in red, and bot exits.
 
-3. Test Case: Data file not present but hash file present:
+- Test Case: Data file not present but hash file present:
     **Expected Result**: Error message stating key files for integrity are missing is printed in red, and bot exits.
 
-4. Test Case: Data file hash does not match hash in hash file:
+- Test Case: Data file hash does not match hash in hash file:
     **Expected Result**: Error message stating data file integrity is compromised is printed in red, and bot exits.
 
 **PulsePilot placed in a directory with no read or write permissions**:
 
-1. Test Case: Launching PulsePilot:
+- Test Case: Launching PulsePilot:
 
     **Expected Result**: Error message stating that the application cannot read or write to the current directory is printed in red, and bot exits.
 

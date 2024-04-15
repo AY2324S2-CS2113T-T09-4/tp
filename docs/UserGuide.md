@@ -182,7 +182,7 @@ Expected Output:
 
 ![Adding Gyms](img/output/adding_gym.png)
 
-If you want to exit the gym station input prompt and go back to the main menu to use other commands, use `back` to do so. PulsePilot will delete the latest gym added and you can then use the other commands.
+If you want to exit the gym station input prompt and go back to the main menu to use other commands, use `back` to do so. PulsePilot will delete the latest gym added, and you can then use the other commands.
 
 Expected Output:
 
@@ -560,18 +560,19 @@ Avoid using extra characters in the commands, such as blank space, newline, etc.
 
 ## Command Summary
 
-| Action        | Format, Examples                                                                                                              |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Print help    | `help`                                                                                                                        |
-| Add Run   | `workout /e:run /d:DISTANCE /t:TIME [/date:DATE]` <br> Example: `workout /e:run /d:5.24 /t:25:23 /date:19-03-2024`</br>                 |
-| Add Gym       | `workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE]` <br> Example: `workout /e:gym /n:4`</br>                                           |
-| Add BMI     | `health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE` <br> Example: `health /h:bmi /height:1.70 /weight:75.42 /date:19-03-2024`</br> |
-| Add Period  | `health /h:period /start:START_DATE [/end:END_DATE]` <br> Example: `health /h:period /start:09-03-2024 /end:16-03-2024`</br>            |
-| Add Appointment  | `health /h:appointment /date:DATE /time:TIME /description:DESCRIPTION` <br> Example: `health /h:appointment /date:29-04-2025 /time:12:00 /description:knee surgery` </br>           |
-| View history  | `history /item:TYPE` <br> Example: `history /item:run` </br>                                                                            |
-| View latest   | `latest /item:TYPE` <br> Example: `latest /item:bmi` </br>                                                                               |
-| Deleting item | `delete /item:TYPE /index:INDEX` <br> Example: `delete /item:run /index:1`  </br>                                                       |
-| Exit bot      | `exit`                                                                                                                        |
+| Action                 | Format, Examples                                                                                                                                                    |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Print help             | `help`                                                                                                                                                              |
+| Add Run                | `workout /e:run /d:DISTANCE /t:TIME [/date:DATE]` <br> Example: `workout /e:run /d:5.24 /t:25:23 /date:19-03-2024`                                                  |
+| Add Gym                | `workout /e:gym /n:NUMBER_OF_STATIONS [/date:DATE]` <br> Example: `workout /e:gym /n:4`                                                                             |
+| Add BMI                | `health /h:bmi /height:HEIGHT /weight:WEIGHT /date:DATE` <br> Example: `health /h:bmi /height:1.70 /weight:75.42 /date:19-03-2024`                                  |
+| Add Period             | `health /h:period /start:START_DATE [/end:END_DATE]` <br> Example: `health /h:period /start:09-03-2024 /end:16-03-2024`                                             |
+| Show Period Prediction | `health /h:prediction`                                                                                                                                              |
+| Add Appointment        | `health /h:appointment /date:DATE /time:TIME /description:DESCRIPTION` <br> Example: `health /h:appointment /date:29-04-2025 /time:12:00 /description:knee surgery` |
+| View history           | `history /item:TYPE` <br> Example: `history /item:run`                                                                                                              |
+| View latest            | `latest /item:TYPE` <br> Example: `latest /item:bmi`                                                                                                                |
+| Deleting item          | `delete /item:TYPE /index:INDEX` <br> Example: `delete /item:run /index:1`                                                                                          |
+| Exit bot               | `exit`                                                                                                                                                              |
 
 ###### [Back to table of contents](#table-of-contents)
 
