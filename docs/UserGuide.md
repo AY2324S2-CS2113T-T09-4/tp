@@ -34,7 +34,7 @@
 
 ## Quick Start
 
-1. Ensure that you have Java 11 installed.
+1. Ensure that you have Java 11 installed. `java -version`
 2. Download the latest `pulsepilot.jar` from [here](https://github.com/AY2324S2-CS2113T-T09-4/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the home folder for PulsePilot.
 4. Open a command terminal:
