@@ -8,9 +8,8 @@ import constants.WorkoutConstant;
 
 /**
  * Represents a Run object that extends the Workout class.
- * It takes in the time and distance of the run as input.
- * It also calculates the pace of the run based on the time and distance.
- * It also formats the time and distance into a readable format.
+ * It takes in the time and distance of the run as input, calculates the pace of the run based on the time and distance,
+ * and formats the time and distance into a readable String format when printed.
  */
 public class Run extends Workout {
     //@@author rouvinerh
@@ -106,6 +105,7 @@ public class Run extends Workout {
      * Retrieves the string representation of a Run object when printing all history.
      * Uses WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT to format the string.
      * Ensures that the format of the string is consistent when printing gym and run objects.
+     *
      * @return a formatted string representing a Run object.
      */
     public String getFormatForAllHistory() {
@@ -163,6 +163,7 @@ public class Run extends Workout {
         if (runDistance <= WorkoutConstant.MIN_RUN_DISTANCE) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.ZERO_DISTANCE_ERROR);
         }
+        assert runDistance > 0: ErrorConstant.ZERO_DISTANCE_ERROR;
         return runDistance;
     }
 
@@ -186,6 +187,7 @@ public class Run extends Workout {
         int minutes = (int) paceInDecimal;
         double remainingSeconds = paceInDecimal - minutes;
         int seconds = (int) Math.round(remainingSeconds * UiConstant.NUM_SECONDS_IN_MINUTE);
+        assert paceInDecimal >= 1: ErrorConstant.MIN_PACE_ERROR;
 
         return String.format(WorkoutConstant.RUN_PACE_FORMAT, minutes, seconds);
     }
@@ -206,6 +208,7 @@ public class Run extends Workout {
             totalSeconds = this.times[WorkoutConstant.RUN_TIME_MINUTE_INDEX] * UiConstant.NUM_SECONDS_IN_MINUTE
                     + this.times[WorkoutConstant.RUN_TIME_SECOND_INDEX];
         }
+        assert totalSeconds > 0: ErrorConstant.ZERO_TIME_ERROR;
         return totalSeconds;
     }
 

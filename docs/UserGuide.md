@@ -34,10 +34,10 @@
 
 ## Quick Start
 
-1. Ensure that you have the Java 11 installed.
+1. Ensure that you have Java 11 installed.
 2. Download the latest `pulsepilot.jar` from [here](https://github.com/AY2324S2-CS2113T-T09-4/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the home folder for PulsePilot.
-4. Open a command terminal (either `cmd.exe` or `bash`);
+4. Open a command terminal:
      - `cd` to the folder with `pulsepilot.jar` in it.
      -  Run `java -jar pulsepilot.jar`.
 5. The application will display a welcome message if started successfully.
@@ -82,6 +82,7 @@ This profile will be used to store all your health and workout data.
    - You may enter commands after receiving this message prompt:
      
       ![Accepting commands](img/output/accepting_commands.png)
+
 4. All your data will be saved and associated with your user profile
    - You can continue tracking your information across multiple devices. Find out more [here](#faq).
 
@@ -117,8 +118,11 @@ Expected Output:
 ![Adding Runs](img/output/adding_runs.png)
 
 > ⚠️ **Minimum and Maximum inputs:**
+>
 > Maximum Pace Value: 30:00/km, Minimum Pace Value: 1:00/km
+>
 > Maximum Run Time: 99:59:59, Minimum Run Time: 00:01
+>
 > Maximum Distance: 5000.00km, Minimum Distance: 0.01km
 > 
 > **Note that exceeding these bounds will trigger an error!**
@@ -148,6 +152,8 @@ Examples:
 
 ###### [Back to table of contents](#table-of-contents)
 
+---
+
 #### Adding Gym Stations
 
 Upon entry of the <code style="color: #D85D43;">workout /e:gym</code> command, the bot will prompt for further details for each station done:
@@ -176,11 +182,6 @@ Expected Output:
 
 ![Adding Gyms](img/output/adding_gym.png)
 
-> ⚠️ **Minimum and Maximum inputs:**
-> Minimum number of stations: 1, Maximum number of stations: 50
-> 
-> **Note that exceeding these bounds will trigger an error!**
-
 If you want to exit the gym station input prompt and go back to the main menu to use other commands, use `back` to do so. PulsePilot will delete the latest gym added and you can then use the other commands.
 
 Expected Output:
@@ -188,9 +189,13 @@ Expected Output:
 ![Going Back](img/output/gym_station_back.png)
 
 > ⚠️ **Minimum and Maximum inputs:**
+>
+> Minimum number of stations: 1, Maximum number of stations: 50
+>
 > Minimum Weight: 0kg, Maximum Weight: 2850kg
-> 
-> 0kg is meant for **bodyweight exercises!**
+>
+> 0kg is meant for exercises that **do not use any weights!**
+>
 > **Note that exceeding these bounds will trigger an error!**
 
 ###### [Back to table of contents](#table-of-contents)
@@ -228,7 +233,9 @@ Expected Output:
 ![Adding BMI](img/output/adding_bmi.png)
 
 > ⚠️ **Minimum and Maximum inputs:**
+>
 > Maximum Height: 2.75m, Minimum Height: 0.01m
+>
 > Maximum Weight: 640.00kg, Minimum Weight: 0.01kg
 > 
 > **Note that exceeding these bounds will trigger an error!**
@@ -250,7 +257,7 @@ Format: <code style="color: #D85D43;">health /h:period /start:START_DATE [/end:E
 
 > ⚠️ Both start and end dates specified cannot be later than the current date!
 
-> ⚠️ The start date of a new period entry must come after the end date of the previous period entry. 
+> ⚠️ The start date of a new period entry must come after the end date of the previous period entry.
 
 > ⚠️ An outstanding period entry must have an end date specified before a new entry can be added.
 
@@ -263,7 +270,6 @@ Examples:
 * <code style="color: #D85D43;">health /h:period /start:09-03-2022 /end:16-03-2022</code>
 * <code style="color: #D85D43;">health /start:09-03-2022 /end:16-03-2022 /h:period</code>
 * <code style="color: #D85D43;">health /h:period /start:09-03-2022</code>
-
 
 Expected Output:
 
@@ -303,6 +309,8 @@ Format: <code style="color: #D85D43;">health /h:appointment /date:DATE /time:TIM
 
 * `DESCRIPTION` is a string (i.e. `review checkup with surgeon`) representing the details of the appointment. The description can **only contain alphanumeric characters, spaces, inverted commas and quotes**.
 
+> ⚠️ Any characters that are **NOT** mentioned above used in the description will trigger an error! Please only use the characters allowed.
+
 Examples:
 
 * <code style="color: #D85D43;">health /h:appointment /date:03-04-2024 /time:14:15 /description:review checkup with surgeon</code>
@@ -312,8 +320,6 @@ Examples:
 Expected Output:
 
 ![Adding Appointment](img/output/adding_appointment.png)
-
-> ⚠️ Any characters that are **NOT** mentioned above used in the description will trigger an error! Please only use the characters allowed.
 
 ###### [Back to table of contents](#table-of-contents)
 
@@ -356,10 +362,10 @@ Prints the **most recently added** instance of `run`, `gym`, `bmi`, `period`, `a
 Format: <code style="color: #D85D43;">latest /item:TYPE</code>
 
 * `TYPE` is either `run`, `gym`, `bmi`, `period` or `appointment`.
-  - `run` shows the latest run
-  - `gym` shows the latest gym
-  - `bmi` shows the latest BMI
-  - `period` shows the latest Period
+  - `run` shows the latest run.
+  - `gym` shows the latest gym.
+  - `bmi` shows the latest BMI.
+  - `period` shows the latest Period.
   - `appointment` shows the latest Appointment, which returns the **largest** date and time sorted by their numerical values.
 
 Examples:

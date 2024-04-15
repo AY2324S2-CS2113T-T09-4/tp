@@ -184,34 +184,33 @@ public class IntegrationTest {
     void addHealthAndShowLatest_correctInput_expectCorrectLatestOutput() {
 
         // Craft the input String to be passed to handler
-        StringBuilder inputString = new StringBuilder();
-        inputString.append("health /h:bmi /height:1.75 /weight:70.00 /date:18-03-2024");
-        inputString.append(System.lineSeparator());
-        inputString.append("latest /item:bmi");
-        inputString.append(System.lineSeparator());
-        inputString.append("health /h:bmi /height: 2.00 /weight:40.00 /date:20-03-2024");
-        inputString.append(System.lineSeparator());
-        inputString.append("latest /item:bmi");
-        inputString.append(System.lineSeparator());
-        inputString.append("health /h:period /start:18-12-2023 /end:26-12-2023");
-        inputString.append(System.lineSeparator());
-        inputString.append("latest /item:period");
-        inputString.append(System.lineSeparator());
-        inputString.append("health /h:period /start:27-01-2024 /end:03-03-2024");
-        inputString.append(System.lineSeparator());
-        inputString.append("latest /item:period");
-        inputString.append(System.lineSeparator());
-        inputString.append("health /h:appointment /date:29-04-2025 /time:12:00 /description:knee surgery");
-        inputString.append(System.lineSeparator());
-        inputString.append("latest /item:appointment");
-        inputString.append(System.lineSeparator());
-        inputString.append("health /h:appointment /date:25-03-2024 /time:23:01 /description:knee surgery 2");
-        inputString.append(System.lineSeparator());
-        inputString.append("latest /item:appointment");
-        inputString.append(System.lineSeparator());
-        inputString.append("health /h:appointment /date:25-03-2026 /time:10:01 /description:plastic surgery");
-        inputString.append(System.lineSeparator());
-        inputString.append("latest /item:appointment");
+        String inputString = "health /h:bmi /height:1.75 /weight:70.00 /date:18-03-2024" +
+                System.lineSeparator() +
+                "latest /item:bmi" +
+                System.lineSeparator() +
+                "health /h:bmi /height: 2.00 /weight:40.00 /date:20-03-2024" +
+                System.lineSeparator() +
+                "latest /item:bmi" +
+                System.lineSeparator() +
+                "health /h:period /start:18-12-2023 /end:26-12-2023" +
+                System.lineSeparator() +
+                "latest /item:period" +
+                System.lineSeparator() +
+                "health /h:period /start:27-01-2024 /end:03-03-2024" +
+                System.lineSeparator() +
+                "latest /item:period" +
+                System.lineSeparator() +
+                "health /h:appointment /date:29-04-2025 /time:12:00 /description:knee surgery" +
+                System.lineSeparator() +
+                "latest /item:appointment" +
+                System.lineSeparator() +
+                "health /h:appointment /date:25-03-2024 /time:23:01 /description:knee surgery 2" +
+                System.lineSeparator() +
+                "latest /item:appointment" +
+                System.lineSeparator() +
+                "health /h:appointment /date:25-03-2026 /time:10:01 /description:plastic surgery" +
+                System.lineSeparator() +
+                "latest /item:appointment";
 
 
         // Craft the expected String to be printed
@@ -270,7 +269,7 @@ public class IntegrationTest {
                 "23:01",
                 "knee surgery 2");
 
-        String latestAppointmentString2 = TestHelper.latestAppointmentOutputString("2024-03-25",
+        TestHelper.latestAppointmentOutputString("2024-03-25",
                 "23:01",
                 "knee surgery 2");
 
@@ -299,7 +298,7 @@ public class IntegrationTest {
         expectedString.append(latestAppointmentString3); // the latest appointment is earlier then appointment3
 
         // Run the process to test the output
-        Handler handler= new Handler(inputString.toString());
+        Handler handler= new Handler(inputString);
         handler.processInput();
         assertEquals(expectedString.toString(), outContent.toString());
         outContent.reset();
@@ -418,7 +417,7 @@ public class IntegrationTest {
     }
 
     /**
-     * Tests the behaviour of the bot when 4 Period objects are added, expects the four periods to be reflected
+     * Tests the behaviour of the bot when 4 Period objects are added, expects the four periods to be reflected.
      * accordingly with a valid prediction on when the next cycle is.
      */
     @Test
@@ -501,9 +500,7 @@ public class IntegrationTest {
         try {
             Parser parser = new Parser();
             parser.parsePredictionInput();
-        } catch (CustomExceptions.InsufficientInput e) {
-            output.printException(e.getMessage());
-        } catch (CustomExceptions.OutOfBounds e) {
+        } catch (CustomExceptions.InsufficientInput | CustomExceptions.OutOfBounds e) {
             output.printException(e.getMessage());
         }
         String expectedErr = errContent.toString();

@@ -21,6 +21,9 @@ class WorkoutListsTest {
 
     }
 
+    /**
+     * Clears the list of workouts/runs/gyms after each test.
+     */
     @AfterEach
     void cleanup() {
         WorkoutLists.clearWorkoutsRunGym();
@@ -101,12 +104,10 @@ class WorkoutListsTest {
             }
 
             ArrayList<? extends Workout> allList = WorkoutLists.getWorkouts();
-            assertEquals(gym1, (Gym) allList.get(0));
-            assertEquals(gym2, (Gym) allList.get(1));
-            assertEquals(run1, (Run) allList.get(2));
-            assertEquals(run2, (Run) allList.get(3));
-
-
+            assertEquals(gym1, allList.get(0));
+            assertEquals(gym2, allList.get(1));
+            assertEquals(run1, allList.get(2));
+            assertEquals(run2, allList.get(3));
 
         } catch (CustomExceptions.InvalidInput | CustomExceptions.InsufficientInput e) {
             fail("Should not throw an exception.");
@@ -116,7 +117,7 @@ class WorkoutListsTest {
 
     /**
      * Tests the behavior of getting the latest run from the run list.
-     * Expected behavior is for actual to equal to the secondRun
+     * Expected behavior is for actual to equal to the secondRun.
      */
     @Test
     void getLatestRun_properList_correctRetrieval() {
@@ -145,17 +146,18 @@ class WorkoutListsTest {
     /**
      * Test deleting of runs with valid list and valid index.
      * Expected behaviour is to have one run left in the list.
-     *
-     * @throws CustomExceptions.InvalidInput If there are invalid Run input parameters.
-     * @throws CustomExceptions.OutOfBounds If the index is invalid.
      */
     @Test
-    void deleteRun_properList_listOfSizeOne() throws CustomExceptions.InvalidInput, CustomExceptions.OutOfBounds {
-        new Run("20:10", "10.3", "15-03-2024");
-        new Run("20:11", "10.3", "15-03-2023");
-        int index = 1;
-        WorkoutLists.deleteRun(index);
-        assertEquals(1, WorkoutLists.getRunSize());
+    void deleteRun_properList_listOfSizeOne() {
+        try {
+            new Run("20:10", "10.3", "15-03-2024");
+            new Run("20:11", "10.3", "15-03-2023");
+            int index = 1;
+            WorkoutLists.deleteRun(index);
+            assertEquals(1, WorkoutLists.getRunSize());
+        } catch (CustomExceptions.InvalidInput | CustomExceptions.OutOfBounds e) {
+            fail("Should not throw an exception");
+        }
     }
 
     /**
@@ -171,11 +173,14 @@ class WorkoutListsTest {
     /**
      * Test deleting of runs with invalid index.
      * Expected behaviour is for an OutOfBounds error to be thrown.
-     * @throws CustomExceptions.InvalidInput If there are invalid Run input parameters.
      */
     @Test
-    void deleteRun_properListInvalidIndex_throwOutOfBoundsForRun() throws CustomExceptions.InvalidInput {
-        new Run("20:11", "10.3", "15-03-2023");
+    void deleteRun_properListInvalidIndex_throwOutOfBoundsForRun(){
+        try {
+            new Run("20:10", "10.3", "15-03-2024");
+        } catch (CustomExceptions.InvalidInput e) {
+            fail("Should not throw an exception");
+        }
         int invalidIndex = 5;
         assertThrows (CustomExceptions.OutOfBounds.class, () ->
                 WorkoutLists.deleteRun(invalidIndex));
@@ -185,11 +190,9 @@ class WorkoutListsTest {
      * Test deleting of gyms with valid list and valid index.
      * Expected behaviour is to delete the first gym and be left with one in the list.
      * The gym left should be the second gym in the list.
-     *
-     * @throws CustomExceptions.OutOfBounds If the index is invalid.
      */
     @Test
-    void deleteGym_validIndex_listOfSizeOne() throws CustomExceptions.OutOfBounds {
+    void deleteGym_validIndex_listOfSizeOne(){
         Gym gym1 = new Gym();
         new ArrayList<>(List.of(1.0));
         new ArrayList<>(Arrays.asList(1.0,2.0));
@@ -206,19 +209,22 @@ class WorkoutListsTest {
         }
 
         int index = 0;
-        WorkoutLists.deleteGym(index);
-        assertEquals(1, WorkoutLists.getGymSize());
-        // check to make sure that after deleting the first gym, the second gym becomes first
-        assertEquals("Squat Press" , WorkoutLists.getGyms().get(0).getStationByIndex(0).getStationName());
-
+        try {
+            WorkoutLists.deleteGym(index);
+            assertEquals(1, WorkoutLists.getGymSize());
+            // check to make sure that after deleting the first gym, the second gym becomes first
+            assertEquals("Squat Press" , WorkoutLists.getGyms().get(0).getStationByIndex(0).getStationName());
+        } catch (CustomExceptions.OutOfBounds outOfBounds) {
+            fail("Should not throw an exception");
+        }
     }
 
     /**
      * Test deleting of gym with empty list.
-     * Expected behaviour is for an AssertionError to be thrown.
+     * Expected behaviour is for an Out of Bound error to be thrown.
      */
     @Test
-    void deleteGym_emptyList_throwsAssertionError() {
+    void deleteGym_emptyList_throwsOutOfBoundsError() {
         Exception exception = assertThrows (CustomExceptions.OutOfBounds.class, () ->
                 WorkoutLists.deleteGym(0));
         assertTrue(exception.getMessage().contains(ErrorConstant.INVALID_INDEX_DELETE_ERROR));
@@ -250,7 +256,5 @@ class WorkoutListsTest {
         exception = assertThrows (CustomExceptions.OutOfBounds.class, () ->
                 WorkoutLists.deleteGym(invalidIndex2));
         assertTrue(exception.getMessage().contains(ErrorConstant.INVALID_INDEX_DELETE_ERROR));
-
-
     }
 }

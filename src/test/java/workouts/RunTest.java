@@ -57,7 +57,7 @@ class RunTest {
 
     /**
      * Tests the behaviour of checkRunTime when invalid inputs are passed.
-     * Expects InvalidInput exception to be thrown with the correct error message
+     * Expects InvalidInput exception to be thrown with the correct error message.
      */
     @Test
     void processRunTime_invalidInputs_expectInvalidInputExceptionWithCorrectErrorMessage() {
@@ -88,7 +88,7 @@ class RunTest {
      * Test the behaviour of checkDistance when valid distance is passed.
      * Expects the 2 decimal place string distance to be returned.
      *
-     * @throws CustomExceptions.InvalidInput If distance is outside valid range
+     * @throws CustomExceptions.InvalidInput If distance is outside valid range.
      */
     @Test
     void checkDistance_validDistance_returnTwoDecimalPlaceDistance() throws CustomExceptions.InvalidInput {

@@ -227,7 +227,7 @@ class OutputTest {
 
         output.printLatest("");
         expectedString = TestHelper.errorInvalidCommandString(ErrorConstant.INVALID_LATEST_OR_DELETE_FILTER);
-        assertEquals(expectedString.toString(), errContent.toString());
+        assertEquals(expectedString, errContent.toString());
 
         cleanup();
 
@@ -405,14 +405,13 @@ class OutputTest {
 
     /**
      * Tests the behaviour of printAppointmentHistory when two Appointment objects are added.
-     * Expects two Appointment objects to be pritned.
+     * Expects two Appointment objects to be printed.
      *
      * @throws CustomExceptions.OutOfBounds  If there is out of bounds access.
-     * @throws CustomExceptions.InvalidInput If there is invalid input.
      */
     @Test
     void printAppointmentHistory_twoAppointments_expectTwoAppointmentsPrinted() throws
-            CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+            CustomExceptions.OutOfBounds {
         new Appointment("29-03-2024", "17:00", "test");
         new Appointment("24-01-2026", "12:00", "test2");
 
@@ -437,7 +436,7 @@ class OutputTest {
      */
     @Test
     void printPeriodHistory_twoPeriods_expectTwoPeriodsPrinted() throws
-            CustomExceptions.OutOfBounds, CustomExceptions.InvalidInput {
+            CustomExceptions.OutOfBounds {
         new Period("09-02-2023", "16-02-2023");
         new Period("09-03-2023", "16-03-2023");
 
@@ -469,8 +468,7 @@ class OutputTest {
      * Tests the behaviour of the printLatestBmi function when two Bmi objects are added.
      */
     @Test
-    void printBmiHistory_twoBmis_expectTwoBmisPrinted() throws CustomExceptions.OutOfBounds,
-            CustomExceptions.InvalidInput {
+    void printBmiHistory_twoBmis_expectTwoBmisPrinted() throws CustomExceptions.OutOfBounds {
         new Bmi("1.75", "70.0", "18-03-2024");
         new Bmi("1.55", "55.0", "20-03-2024");
 
@@ -499,8 +497,7 @@ class OutputTest {
 
 
     /**
-     * Tests the behaviour of the printGymHistory function, which should print both Gyms
-     * added.
+     * Tests the behaviour of the printGymHistory function, which should print both Gyms added.
      */
     @Test
     void printGymHistory_correctInput_expectPrintGymHistory() {
@@ -561,7 +558,7 @@ class OutputTest {
     }
 
     /**
-     * Test the behaviour of the printRunHistory function, which should print both Runs and Gyms
+     * Test the behaviour of the printRunHistory function, which should print both Runs and Gyms.
      */
     @Test
     void printWorkoutHistory() {

@@ -242,8 +242,6 @@ class ParserTest {
         assertThrows(CustomExceptions.InvalidInput.class, () -> parser.splitAppointmentDetails(input));
     }
 
-
-
     //@@author rouvinerh
     /**
      * Tests the behaviour of a correctly formatted string being
@@ -314,8 +312,7 @@ class ParserTest {
 
     //@@author rouvinerh
     /**
-     * Tests the behaviour of a correctly formatted string without
-     * dates being passed to splitGymInput.
+     * Tests the behaviour of a correctly formatted string without dates being passed to splitGymInput.
      * Expects the list of strings to contain the correct parameters.
      *
      * @throws CustomExceptions.InsufficientInput If there is insufficient input.
@@ -370,6 +367,10 @@ class ParserTest {
     }
 
     //@@author JustinSoh
+    /**
+     * Tests the behaviour of parseGymFileInput with the correct input.
+     * Ensures a Gym object is added with the correct attributes.
+     */
     @Test
     void parseGymFileInput_correctInput_returnsGymObject() {
         String input = "gym:2:11-11-1997:bench press:4:10:10,20,30,40:squats:2:5:20,30";
@@ -440,7 +441,6 @@ class ParserTest {
      * Tests the behaviour of correct inputs being passed to splitAndValidateGymStationInput
      * Expects no exceptions thrown.
      *
-     * @throws CustomExceptions.InsufficientInput If there are not enough parameters.
      * @throws CustomExceptions.InvalidInput      If there are invalid parameters specified.
      */
     @Test

@@ -64,7 +64,6 @@ class PeriodTest {
         Period firstPeriod = new Period("09-02-2023", "16-02-2023");
         Period secondPeriod = new Period("09-03-2023", "16-03-2023");
 
-
         String expected = "Period Start: "
                 + secondPeriod.getStartDate()
                 + " Period End: "
@@ -118,7 +117,7 @@ class PeriodTest {
     }
 
     /**
-     * Test deleting of periods with valid list and valid index.
+     * Tests deleting of periods with valid list and valid index.
      * Expected behaviour is to have one periods entry left in the list.
      *
      * @throws CustomExceptions.OutOfBounds If the index is invalid.
@@ -134,7 +133,7 @@ class PeriodTest {
     }
 
     /**
-     * Test deleting of period with empty list.
+     * Tests deleting of period with empty list.
      * Expected behaviour is for an AssertionError to be thrown.
      */
     @Test
@@ -144,7 +143,7 @@ class PeriodTest {
     }
 
     /**
-     * Test deleting of period with invalid index.
+     * Tests deleting of period with invalid index.
      * Expected behaviour is for an OutOfBounds error to be thrown.
      */
     @Test
@@ -161,7 +160,6 @@ class PeriodTest {
      */
     @Test
     void predictNextPeriodStartDate_sufficientInputs_printCorrectPredictedDate() throws CustomExceptions.OutOfBounds{
-        HealthList healthList = new HealthList();
         Period firstPeriod = new Period("09-12-2023", "16-12-2023");
         Period secondPeriod = new Period("09-01-2024", "16-01-2024");
         Period thirdPeriod = new Period("10-02-2024", "16-02-2024");
@@ -224,7 +222,6 @@ class PeriodTest {
      */
     @Test
     void printLatestThreeCycles_fourInputs_printsThreePeriodObjectsOnly() {
-        HealthList healthList = new HealthList();
         Period firstPeriod = new Period("09-01-2024", "16-01-2024");
         Period secondPeriod = new Period("10-02-2024", "16-02-2024");
         Period thirdPeriod = new Period("09-03-2024", "14-03-2024");
@@ -273,16 +270,15 @@ class PeriodTest {
     }
 
     /**
-     * Test get period with out of bounds index.
+     * Test getPeriod without of bounds index.
      * Expected behaviour is for null return.
      */
     @Test
-    void getPeriod_emptyPeriodList_expectNull() throws CustomExceptions.OutOfBounds {
-        HealthList healthList = new HealthList();
+    void getPeriod_emptyPeriodList_expectNull() {
         Period period = new Period("09-01-2024", "16-01-2024");
-        Period result = healthList.getPeriod(1);
+        Period result = HealthList.getPeriod(1);
 
-        assertEquals(null, result);
+        assertNull(result);
     }
 
     /**
@@ -308,10 +304,9 @@ class PeriodTest {
      */
     @Test
     void predictNextPeriodStartDate_emptyPeriodList_throwOutOfBoundsForPeriod() {
-        int invalidIndex = -1;
         CustomExceptions.OutOfBounds exception = assertThrows(
                 CustomExceptions.OutOfBounds.class,
-                () -> HealthList.predictNextPeriodStartDate()
+                HealthList::predictNextPeriodStartDate
         );
         String expected = "\u001b[31mOut of Bounds Error: "
                 + ErrorConstant.PERIOD_EMPTY_ERROR
@@ -325,7 +320,6 @@ class PeriodTest {
      */
     @Test
     public void periodConstructor_expectCreatePeriodWithoutEndDate() {
-        HealthList healthList = new HealthList();
         Period period = new Period("03-04-2024");
 
         Parser parser = new Parser();
@@ -352,7 +346,6 @@ class PeriodTest {
      */
     @Test
     public void updateEndDate_expectUpdatePeriodWithEndDate () {
-        HealthList healthList = new HealthList();
         Period period = new Period("03-04-2024");
 
         Parser parser = new Parser();
@@ -383,9 +376,7 @@ class PeriodTest {
      */
     @Test
     void calculatePeriodLength_nullEndDate_expectZeroReturn() {
-        HealthList healthList = new HealthList();
         Period period = new Period("03-04-2024");
-
         assertEquals(0, period.calculatePeriodLength());
     }
 

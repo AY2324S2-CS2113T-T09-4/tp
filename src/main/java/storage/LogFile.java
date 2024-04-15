@@ -42,6 +42,7 @@ public class LogFile {
         return instance;
     }
 
+    //@@author rouvinerh
     /**
      * Initialises the log file to be used. Creates the log file if needed, then sets formatters.
      * Parent handlers are set to false to prevent printing of logs to terminal.
@@ -62,6 +63,7 @@ public class LogFile {
         assert(logFileHandler != null);
     }
 
+    //@@author L5-Z
     /**
      * Writes information or warning logs to the log file.
      *

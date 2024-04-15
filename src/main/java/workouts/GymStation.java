@@ -101,6 +101,7 @@ public class GymStation {
      * Retrieves the string representation of a GymStation object for writing into a file.
      * Formats the string in the following format
      * "[Exercise Name]:[Number of Sets]:[Repetitions]:[Weights1, Weight2,Weight3 ...]"
+     *
      * @return A formatted string representing a GymStation object with the format above.
      */
     protected String toFileString(){
@@ -320,6 +321,7 @@ public class GymStation {
 
     /**
      * Checks if the number of weights matches the number of sets.
+     *
      * @param weights The list of weights.
      * @param numberOfSets The number of sets.
      * @throws CustomExceptions.InvalidInput if the number of weights does not match the number of sets.

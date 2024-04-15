@@ -82,8 +82,7 @@ class GymTest {
     }
 
     /**
-     * Tests the behaviour of incorrect inputs being passed to
-     * addStation method in Gym
+     * Tests the behaviour of incorrect inputs being passed to the addStation method in Gym.
      * Expects InvalidInput exception to be thrown.
      */
     @Test

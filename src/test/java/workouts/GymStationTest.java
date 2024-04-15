@@ -20,7 +20,6 @@ class GymStationTest {
 
     @BeforeEach
     void setUp() {
-
         // initialise a gymStation object to test the methods
         try {
             gymStation = new GymStation("Bench Press",
@@ -30,15 +29,12 @@ class GymStationTest {
         } catch (CustomExceptions.InsufficientInput | CustomExceptions.InvalidInput e) {
             fail("Should not have thrown error here");
         }
-
-
     }
 
     @AfterEach
     void cleanup() {
 
     }
-
 
     /**
      * Tests the behaviour of valid exercise names being passed to validateExerciseName.
@@ -78,7 +74,6 @@ class GymStationTest {
         String input4 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ";
         exception = assertThrows(CustomExceptions.InvalidInput.class, () -> gymStation.validateGymStationName(input4));
         assertTrue(exception.getMessage().contains(ErrorConstant.INVALID_GYM_STATION_NAME_ERROR));
-
     }
 
     /**
@@ -90,13 +85,11 @@ class GymStationTest {
         Exception exception = assertThrows(CustomExceptions.InsufficientInput.class, ()
                 -> gymStation.validateGymStationName(""));
         assertTrue(exception.getMessage().contains(ErrorConstant.INVALID_GYM_STATION_EMPTY_NAME_ERROR));
-
     }
 
     /**
      * Tests the behaviour of a correct weights array being passed to validateWeightsArray.
-     * Expects no exception to be thrown, and the correct ArrayList of integers to be
-     * returned.
+     * Expects no exception to be thrown, and the correct ArrayList of integers to be returned.
      *
      * @throws CustomExceptions.InvalidInput If the input string does not have the right format.
      */
@@ -112,7 +105,6 @@ class GymStationTest {
 
         ArrayList<Double> result = gymStation.processWeightsArray(input);
         assertArrayEquals(expected.toArray(), result.toArray());
-
     }
 
     /**
