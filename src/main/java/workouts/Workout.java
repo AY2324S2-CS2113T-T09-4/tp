@@ -12,7 +12,6 @@ public class Workout {
     //@@author JustinSoh
     private LocalDate date = null;
 
-
     /**
      * Overloaded constructor that uses the optional date parameter from user input.
      *
@@ -57,6 +56,16 @@ public class Workout {
     }
 
     /**
+     * Retrieves the string representation of a Workout object.
+     *
+     * @return A formatted string representing a Workout object.
+     */
+    @Override
+    public String toString(){
+        return getDate().toString();
+    }
+
+    /**
      * Adds the workout object into the workout list.
      *
      * @param workout The workout object to be added.
@@ -68,15 +77,5 @@ public class Workout {
         } else if (workout instanceof Gym) {
             workoutLists.addGym((Gym) workout);
         }
-    }
-
-    /**
-     * Retrieves the string representation of a Workout object.
-     *
-     * @return A formatted string representing a Workout object.
-     */
-    @Override
-    public String toString(){
-        return getDate().toString();
     }
 }

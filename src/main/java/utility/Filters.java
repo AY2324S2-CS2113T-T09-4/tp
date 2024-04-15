@@ -6,7 +6,6 @@ package utility;
  */
 
 public class Filters {
-
     public enum Command {
         WORKOUT,
         HISTORY,

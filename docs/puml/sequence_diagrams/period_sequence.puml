@@ -26,9 +26,13 @@ alt endFlag is present
     alt list is empty || end date present in latest period
     Parser -> Period **: new
     activate Period #FFBBBB
+    Period -> HealthList **: new
+    activate HealthList #FFBBBB
+    HealthList --> Period:
+    deactivate HealthList #FFBBBB
+
     Period -> HealthList: addPeriod(startDate, endDate)
     activate HealthList #FFBBBB
-ref over HealthList: setCycleLength()
     HealthList --> Period:
     deactivate HealthList #FFBBBB
 
@@ -51,7 +55,6 @@ else endFlag is not present
 
     activate Period #FFBBBB
     Period -> HealthList: addPeriod(startDate)
-ref over HealthList: setCycleLength()
     activate HealthList #FFBBBB
     HealthList --> Period:
     deactivate HealthList #FFBBBB

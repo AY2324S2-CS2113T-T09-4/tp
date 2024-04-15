@@ -8,7 +8,7 @@ import constants.WorkoutConstant;
 
 /**
  * Represents a Run object that extends the Workout class.
- * It takes in the {@code time} and {@code distance} of the run as input.
+ * It takes in the time and distance of the run as input.
  * It also calculates the pace of the run based on the time and distance.
  * It also formats the time and distance into a readable format.
  */
@@ -104,7 +104,7 @@ public class Run extends Workout {
 
     /**
      * Retrieves the string representation of a Run object when printing all history.
-     * Uses {@code WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT} to format the string.
+     * Uses WorkoutConstant.HISTORY_WORKOUTS_DATA_FORMAT to format the string.
      * Ensures that the format of the string is consistent when printing gym and run objects.
      * @return a formatted string representing a Run object.
      */
@@ -120,57 +120,6 @@ public class Run extends Workout {
     }
 
     //@@author rouvinerh
-    /**
-     * Returns the total seconds based on the {@code times} taken for the run.
-     *
-     * @return The total number of seconds in the run.
-     */
-    private int calculateTotalSeconds() {
-        int totalSeconds;
-
-        if (times[0] > 0) {
-            totalSeconds = this.times[WorkoutConstant.RUN_TIME_HOUR_INDEX] * UiConstant.NUM_SECONDS_IN_HOUR
-                    + this.times[WorkoutConstant.RUN_TIME_MINUTE_INDEX] * UiConstant.NUM_SECONDS_IN_MINUTE
-                    + this.times[WorkoutConstant.RUN_TIME_SECOND_INDEX];
-        } else {
-            totalSeconds = this.times[WorkoutConstant.RUN_TIME_MINUTE_INDEX] * UiConstant.NUM_SECONDS_IN_MINUTE
-                    + this.times[WorkoutConstant.RUN_TIME_SECOND_INDEX];
-        }
-        return totalSeconds;
-    }
-
-    /**
-     * Checks the hour, minute and second values for run time.
-     *
-     * @param runTimeParts The run time values.
-     * @throws CustomExceptions.InvalidInput If the run time specified is not invalid.
-     */
-    private void checkRunTimeValues(Integer[] runTimeParts) throws CustomExceptions.InvalidInput {
-        int hours = runTimeParts[WorkoutConstant.RUN_TIME_HOUR_INDEX];
-        int minutes = runTimeParts[WorkoutConstant.RUN_TIME_MINUTE_INDEX];
-        int seconds = runTimeParts[WorkoutConstant.RUN_TIME_SECOND_INDEX];
-
-        if (hours == UiConstant.MIN_HOURS) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HOUR_ERROR);
-        }
-
-        // minutes can always be 00
-        if (minutes > UiConstant.MAX_MINUTES) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_MINUTE_ERROR);
-        }
-
-        // seconds can never be > 59
-        if (seconds > UiConstant.MAX_SECONDS) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_SECOND_ERROR);
-        }
-        if (hours == WorkoutConstant.NO_HOURS_PRESENT) {
-            // if hours not present, minutes and seconds cannot be 00
-            if (minutes == UiConstant.MIN_MINUTES && seconds == UiConstant.MIN_SECONDS) {
-                throw new CustomExceptions.InvalidInput(ErrorConstant.ZERO_TIME_ERROR);
-            }
-        }
-    }
-
     /**
      * Method splits and validates run time input.
      *
@@ -239,5 +188,56 @@ public class Run extends Workout {
         int seconds = (int) Math.round(remainingSeconds * UiConstant.NUM_SECONDS_IN_MINUTE);
 
         return String.format(WorkoutConstant.RUN_PACE_FORMAT, minutes, seconds);
+    }
+
+    /**
+     * Returns the total seconds based on the times taken for the run.
+     *
+     * @return The total number of seconds in the run.
+     */
+    private int calculateTotalSeconds() {
+        int totalSeconds;
+
+        if (times[0] > 0) {
+            totalSeconds = this.times[WorkoutConstant.RUN_TIME_HOUR_INDEX] * UiConstant.NUM_SECONDS_IN_HOUR
+                    + this.times[WorkoutConstant.RUN_TIME_MINUTE_INDEX] * UiConstant.NUM_SECONDS_IN_MINUTE
+                    + this.times[WorkoutConstant.RUN_TIME_SECOND_INDEX];
+        } else {
+            totalSeconds = this.times[WorkoutConstant.RUN_TIME_MINUTE_INDEX] * UiConstant.NUM_SECONDS_IN_MINUTE
+                    + this.times[WorkoutConstant.RUN_TIME_SECOND_INDEX];
+        }
+        return totalSeconds;
+    }
+
+    /**
+     * Checks the hour, minute and second values for run time.
+     *
+     * @param runTimeParts The run time values.
+     * @throws CustomExceptions.InvalidInput If the run time specified is not invalid.
+     */
+    private void checkRunTimeValues(Integer[] runTimeParts) throws CustomExceptions.InvalidInput {
+        int hours = runTimeParts[WorkoutConstant.RUN_TIME_HOUR_INDEX];
+        int minutes = runTimeParts[WorkoutConstant.RUN_TIME_MINUTE_INDEX];
+        int seconds = runTimeParts[WorkoutConstant.RUN_TIME_SECOND_INDEX];
+
+        if (hours == UiConstant.MIN_HOURS) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HOUR_ERROR);
+        }
+
+        // minutes can always be 00
+        if (minutes > UiConstant.MAX_MINUTES) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_MINUTE_ERROR);
+        }
+
+        // seconds can never be > 59
+        if (seconds > UiConstant.MAX_SECONDS) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_SECOND_ERROR);
+        }
+        if (hours == WorkoutConstant.NO_HOURS_PRESENT) {
+            // if hours not present, minutes and seconds cannot be 00
+            if (minutes == UiConstant.MIN_MINUTES && seconds == UiConstant.MIN_SECONDS) {
+                throw new CustomExceptions.InvalidInput(ErrorConstant.ZERO_TIME_ERROR);
+            }
+        }
     }
 }

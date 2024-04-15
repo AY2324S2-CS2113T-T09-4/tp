@@ -33,7 +33,6 @@ import utility.Filters.DataType;
  * It provides methods to load, save, and process different types of data as well as prevent tampering via hashing.
  */
 public class DataFile {
-
     public static String userName = null;
     private static DataFile instance = null;
 
@@ -48,34 +47,6 @@ public class DataFile {
     public DataFile() {
         output = new Output();
         validation = new Validation();
-    }
-
-    /**
-     * Generates the SHA-256 hash value of the {@code pulsepilot_data.txt} file.
-     *
-     * @param file The file for which to generate the hash.
-     * @return A String representing the SHA-256 hash value of the {@code pulsepilot_data.txt} file.
-     * @throws NoSuchAlgorithmException If the SHA-256 algorithm is not available.
-     * @throws IOException              If an I/O error occurs while reading the file.
-     */
-    protected String generateFileHash(File file) throws NoSuchAlgorithmException, IOException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        FileInputStream fis = new FileInputStream(file);
-        byte[] dataBytes = new byte[1024];
-
-        int bytesRead;
-        while ((bytesRead = fis.read(dataBytes)) != -1) {
-            md.update(dataBytes, 0, bytesRead);
-        }
-
-        byte[] digest = md.digest();
-        StringBuilder sb = new StringBuilder();
-        for (byte b : digest) {
-            sb.append(String.format("%02x", b & 0xff));
-        }
-
-        fis.close();
-        return sb.toString();
     }
 
     /**
@@ -143,53 +114,6 @@ public class DataFile {
         Path dataFilePath = Path.of(UiConstant.dataFilePath);
         assert Files.exists(dataFilePath) : "Data file does not exist.";
         return status;
-    }
-
-    /**
-     * Handles the failure of file hash verification.
-     * This method is called when the hash value of the data file does not match the expected value.
-     * It logs the error, prints the exception and  deletes the data file and hash file.
-     *
-     * @param errorString The error message to be logged and printed.
-     */
-    protected void processFail(String errorString) {
-        File dataFile = UiConstant.saveFile;
-        File hashFile = new File(UiConstant.hashFilePath);
-
-        LogFile.writeLog(errorString, true);
-        output.printException(errorString);
-
-        hashFile.delete();
-        dataFile.delete();
-    }
-
-    /**
-     * Reads the hash value from a hash file.
-     *
-     * @param hashFile The hash file to read from.
-     * @return The hash value read from the file.
-     * @throws IOException If an I/O error occurs.
-     */
-    protected String readHashFromFile(File hashFile) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        Scanner scanner = new Scanner(hashFile);
-        while (scanner.hasNextLine()) {
-            sb.append(scanner.nextLine());
-        }
-        scanner.close();
-        return sb.toString();
-    }
-
-    /**
-     * Writes the hash value to the hash file.
-     *
-     * @param hash     The hash value to write.
-     * @throws IOException If an I/O error occurs.
-     */
-    private void writeHashToFile(String hash) throws IOException {
-        FileOutputStream fos = new FileOutputStream(UiConstant.hashFilePath);
-        fos.write(hash.getBytes());
-        fos.close();
     }
 
     /**
@@ -261,6 +185,7 @@ public class DataFile {
      * Processes the username from the data file.
      *
      * @param name The username read from the data file.
+     * @throws CustomExceptions.InvalidInput If the username is invalid.
      */
     public void processName(String name) throws CustomExceptions.InvalidInput {
         if (validation.validateIfUsernameIsValid(name)) {
@@ -273,6 +198,8 @@ public class DataFile {
      * Processes an appointment entry from the input string array and adds it to the health list.
      *
      * @param input The input string array containing appointment data.
+     * @throws CustomExceptions.InsufficientInput If there is insufficient input data.
+     * @throws CustomExceptions.InvalidInput If there is an error in the input data format.
      */
     public void processAppointment(String[] input) throws CustomExceptions.InsufficientInput,
             CustomExceptions.InvalidInput {
@@ -289,8 +216,11 @@ public class DataFile {
      * Processes a period entry from the input string array and adds it to the health list.
      *
      * @param input The input string array containing period data.
+     * @throws CustomExceptions.InsufficientInput If there is insufficient input data.
+     * @throws CustomExceptions.InvalidInput If there is an error in the input data format.
      */
-    public void processPeriod(String[] input) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+    public void processPeriod(String[] input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
         String startDate = input[1].trim(); // start
         String endDate = input[2].trim(); // end, skip 3 duration
         String[] checkPeriodInput = {startDate, endDate};
@@ -307,6 +237,8 @@ public class DataFile {
      * Processes a BMI entry from the input string array and adds it to the health list.
      *
      * @param input The input string array containing BMI data.
+     * @throws CustomExceptions.InsufficientInput If there is insufficient input data.
+     * @throws CustomExceptions.InvalidInput If there is an error in the input data format.
      */
     public void processBmi(String[] input) throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
         String height = input[1].trim(); // height
@@ -322,6 +254,7 @@ public class DataFile {
      *
      * @param input The input string array containing run data.
      * @throws CustomExceptions.InvalidInput If there is an error in the input data format.
+     * @throws CustomExceptions.InsufficientInput If there is insufficient input data.
      */
     public void processRun(String[] input) throws CustomExceptions.InvalidInput, CustomExceptions.InsufficientInput {
         String distance = input[1].trim(); // distance
@@ -343,6 +276,7 @@ public class DataFile {
      * @param rawInput The raw input string containing gym data.
      * @throws CustomExceptions.InvalidInput  If there is an error in the input data format.
      * @throws CustomExceptions.FileReadError If there is an error reading the gym file.
+     * @throws CustomExceptions.InsufficientInput If there is insufficient input data.
      */
     public void processGym(String rawInput) throws CustomExceptions.InvalidInput, CustomExceptions.FileReadError,
             CustomExceptions.InsufficientInput {
@@ -494,6 +428,81 @@ public class DataFile {
                 }
             }
         }
+    }
+    //@@author L5-Z
+    /**
+     * Generates the SHA-256 hash value of the pulsepilot_data.txt file.
+     *
+     * @param file The file for which to generate the hash.
+     * @return A String representing the SHA-256 hash value of the pulsepilot_data.txt file.
+     * @throws NoSuchAlgorithmException If the SHA-256 algorithm is not available.
+     * @throws IOException              If an I/O error occurs while reading the file.
+     */
+    protected String generateFileHash(File file) throws NoSuchAlgorithmException, IOException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        FileInputStream fis = new FileInputStream(file);
+        byte[] dataBytes = new byte[1024];
+
+        int bytesRead;
+        while ((bytesRead = fis.read(dataBytes)) != -1) {
+            md.update(dataBytes, 0, bytesRead);
+        }
+
+        byte[] digest = md.digest();
+        StringBuilder sb = new StringBuilder();
+        for (byte b : digest) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+
+        fis.close();
+        return sb.toString();
+    }
+
+    /**
+     * Handles the failure of file hash verification.
+     * This method is called when the hash value of the data file does not match the expected value.
+     * It logs the error, prints the exception and  deletes the data file and hash file.
+     *
+     * @param errorString The error message to be logged and printed.
+     */
+    protected void processFail(String errorString) {
+        File dataFile = UiConstant.saveFile;
+        File hashFile = new File(UiConstant.hashFilePath);
+
+        LogFile.writeLog(errorString, true);
+        output.printException(errorString);
+
+        hashFile.delete();
+        dataFile.delete();
+    }
+
+    /**
+     * Reads the hash value from a hash file.
+     *
+     * @param hashFile The hash file to read from.
+     * @return The hash value read from the file.
+     * @throws IOException If an I/O error occurs.
+     */
+    protected String readHashFromFile(File hashFile) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        Scanner scanner = new Scanner(hashFile);
+        while (scanner.hasNextLine()) {
+            sb.append(scanner.nextLine());
+        }
+        scanner.close();
+        return sb.toString();
+    }
+
+    /**
+     * Writes the hash value to the hash file.
+     *
+     * @param hash     The hash value to write.
+     * @throws IOException If an I/O error occurs.
+     */
+    private void writeHashToFile(String hash) throws IOException {
+        FileOutputStream fos = new FileOutputStream(UiConstant.hashFilePath);
+        fos.write(hash.getBytes());
+        fos.close();
     }
 }
 

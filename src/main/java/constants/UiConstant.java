@@ -8,8 +8,6 @@ import java.io.File;
  * numerical values, history management, delete operations, and split indices.
  */
 public class UiConstant {
-
-    // Special Characters
     public static final String SPLIT_BY_SLASH = "/";
     public static final String SPLIT_BY_COLON = ":";
     public static final String SPLIT_BY_WHITESPACE = " ";
@@ -19,8 +17,6 @@ public class UiConstant {
     public static final String PARTITION_LINE = "____________________________________________________________";
     public static final String EMPTY_STRING = "";
     public static final String FULL_STOP = ".";
-
-    // Regex
     public static final String VALID_DATE_REGEX = "^\\d{2}-\\d{2}-\\d{4}$";
     public static final String VALID_TWO_DP_NUMBER_REGEX = "^\\d+\\.\\d{2}$";
     public static final String VALID_TIME_REGEX = "^\\d{2}:\\d{2}$";
@@ -30,12 +26,7 @@ public class UiConstant {
     public static final String VALID_GYM_STATION_NAME_REGEX = "^[A-Za-z\\s]+$";
     public static final String VALID_USERNAME_REGEX = "^[0-9A-Za-z\\s]+$";
     public static final String VALID_WEIGHTS_ARRAY_REGEX = "^\\d+(\\.\\d{1,3})?(,\\d+(\\.\\d{1,3})?)*$";
-
-    // PulsePilot UI replies
     public static final String EXIT_MESSAGE = "Initiating PulsePilot landing sequence...";
-
-
-    // Storage
     public static final int DATA_TYPE_INDEX = 0;
     public static final int NAME_INDEX = 1;
     public static final String NAME_LABEL = "NAME";
@@ -48,16 +39,8 @@ public class UiConstant {
     public static final String FILE_FOUND_MESSAGE = "Welcome back, Captain ";
     public static final String FILE_MISSING_MESSAGE = "What is your name, voyager?";
     public static final String SUCCESSFUL_LOAD = "Prior data found. Orbit has been synchronised.";
-
-
-    // History
     public static final String ITEM_FLAG = "/item:";
-
-    // Delete
     public static final String INDEX_FLAG = "/index:";
-
-
-    // Numerical values
     public static final int NUM_SECONDS_IN_MINUTE = 60;
     public static final int NUM_SECONDS_IN_HOUR = 3600;
     public static final int MIN_MINUTES = 0;
@@ -72,8 +55,6 @@ public class UiConstant {
     public static final int MIN_SECONDS = 0;
     public static final int NUM_OF_SLASHES_FOR_DELETE = 2;
     public static final int NUM_OF_SLASHES_FOR_LATEST_AND_HISTORY = 1;
-
-    // SPLIT INDEX
     public static final int DELETE_ITEM_STRING_INDEX = 0;
     public static final int DELETE_ITEM_NUMBER_INDEX = 1;
     public static final int SPLIT_TIME_HOUR_INDEX = 0;

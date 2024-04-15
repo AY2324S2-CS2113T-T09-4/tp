@@ -7,8 +7,8 @@ import constants.WorkoutConstant;
  */
 public class GymSet {
     //@@author JustinSoh
-    private double weight;
-    private int numberOfRepetitions;
+    private final double weight;
+    private final int numberOfRepetitions;
 
     /**
      * Constructs a new GymSet object using the weight and reps.

@@ -11,11 +11,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
- * The {@code Period} class inherits from {@code Health} class.
+ * The Period class inherits from Health class.
  * It contains information about the start date, end date, time, period length, and cycle length of the period,
  * and the methods to calculate period and cycle length and predict the next period.
  */
 public class Period extends Health {
+    //@@author syj02
     private LocalDate startDate;
     private LocalDate endDate;
     private long periodLength;
@@ -24,10 +25,8 @@ public class Period extends Health {
     private final Parser parser = new Parser();
     private final HealthList healthList = new HealthList();
 
-    //@@author syj02
-
     /**
-     * Constructs a new {@code Period} object with only the start date provided.
+     * Constructs a new Period object with only the start date provided.
      *
      * @param stringStartDate A string representing the start date of the period.
      */
@@ -40,7 +39,7 @@ public class Period extends Health {
     }
 
     /**
-     * Constructor for {@code Period} object.
+     * Constructor for Period object.
      *
      * @param stringStartDate A string representing the start date of the period.
      * @param stringEndDate   A string representing the end date of the period.
@@ -56,7 +55,7 @@ public class Period extends Health {
     /**
      * Gets cycle length.
      *
-     * @return Cycle length as {@code long}.
+     * @return Cycle length as long.
      */
     public long getCycleLength() {
         return cycleLength;
@@ -65,7 +64,7 @@ public class Period extends Health {
     /**
      * Updates the end date of the period and calculates the period length.
      *
-     * @param stringEndDate A {@code String} representing the new end date of the period.
+     * @param stringEndDate A String representing the new end date of the period.
      */
     public void updateEndDate(String stringEndDate) {
         this.endDate = parser.parseDate(stringEndDate);
@@ -73,7 +72,7 @@ public class Period extends Health {
     }
 
     /**
-     * Retrieves the start date of the period of {@code LocalDate} type.
+     * Retrieves the start date of the period of LocalDate type.
      *
      * @return The start date of period.
      * @throws AssertionError if the start date is null.
@@ -84,7 +83,7 @@ public class Period extends Health {
     }
 
     /**
-     * Retrieves the end date of the period of {@code LocalDate} type.
+     * Retrieves the end date of the period of LocalDate type.
      *
      * @return The end date of period.
      */
@@ -93,7 +92,7 @@ public class Period extends Health {
     }
 
     /**
-     * Retrieves the length of the period of {@code long} type.
+     * Retrieves the length of the period of long type.
      *
      * @return The period length.
      */
@@ -103,7 +102,6 @@ public class Period extends Health {
     }
 
     //@@author j013n3
-
     /**
      * Calculates the sum of the cycle lengths of the latest three menstrual cycles.
      *
@@ -111,7 +109,6 @@ public class Period extends Health {
      */
     public long getLastThreeCycleLengths() {
         long sumOfCycleLengths = 0;
-
         int startIndexForPrediction = HealthConstant.LAST_CYCLE_INDEX;
         assert startIndexForPrediction >= HealthConstant.FIRST_ITEM : ErrorConstant.START_INDEX_NEGATIVE_ERROR;
 
@@ -121,22 +118,7 @@ public class Period extends Health {
         for (int i = startIndexForPrediction; i <= endIndexForPrediction; i++) {
             sumOfCycleLengths += Objects.requireNonNull(HealthList.getPeriod(i)).cycleLength;
         }
-
         return sumOfCycleLengths;
-    }
-
-    /**
-     * Calculates the length of the period in days.
-     *
-     * @return The length of the period.
-     */
-    public long calculatePeriodLength() {
-        if (endDate == null || startDate == null) {
-            return 0;
-        } else {
-            // Add 1 to include both start and end dates
-            return ChronoUnit.DAYS.between(getStartDate(), getEndDate()) + 1;
-        }
     }
 
     /**
@@ -196,9 +178,9 @@ public class Period extends Health {
     }
 
     /**
-     * Returns the string representation of a {@code Period} object.
+     * Returns the string representation of a Period object.
      *
-     * @return A formatted string representing a {@code Period} object.
+     * @return A formatted string representing a Period object.
      */
     @Override
     public String toString() {
@@ -210,5 +192,19 @@ public class Period extends Health {
                 HealthConstant.DAYS_MESSAGE)
                 + (this.cycleLength > HealthConstant.MIN_LENGTH ? System.lineSeparator()
                 + String.format(HealthConstant.PRINT_CYCLE_FORMAT, this.cycleLength) : UiConstant.EMPTY_STRING);
+    }
+
+    /**
+     * Calculates the length of the period in days.
+     *
+     * @return The length of the period.
+     */
+    protected long calculatePeriodLength() {
+        if (endDate == null || startDate == null) {
+            return 0;
+        } else {
+            // Add 1 to include both start and end dates
+            return ChronoUnit.DAYS.between(getStartDate(), getEndDate()) + 1;
+        }
     }
 }

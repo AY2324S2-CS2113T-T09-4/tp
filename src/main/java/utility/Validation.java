@@ -23,7 +23,8 @@ public class Validation {
     public Validation(){
 
     }
-    // @@author rouvinerh
+
+    //@@author rouvinerh
     /**
      * Validates that the input date string is correctly formatted in DD-MM-YYYY and is a valid date.
      *
@@ -68,13 +69,12 @@ public class Validation {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_DELETE_PARAMETERS_ERROR);
         }
         validateDeleteAndLatestFilter(deleteDetails[UiConstant.DELETE_ITEM_STRING_INDEX].toLowerCase());
-
-        if (!deleteDetails[UiConstant.DELETE_ITEM_NUMBER_INDEX].matches(UiConstant.VALID_POSITIVE_INTEGER_REGEX)) {
+        if (!validateIntegerIsPositive(deleteDetails[UiConstant.DELETE_ITEM_NUMBER_INDEX])) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_INDEX_ERROR);
         }
     }
 
-    // @@author L5-Z
+    //@@author L5-Z
     /**
      * Validates whether the filter string is either 'run', 'gym', 'workouts', 'bmi', 'period' or 'appointment'.
      *
@@ -93,7 +93,7 @@ public class Validation {
         throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_HISTORY_FILTER_ERROR);
     }
 
-    // @@author L5-Z
+    //@@author L5-Z
     /**
      * Validates whether the filter string is either 'run', 'gym', 'bmi', 'period' or 'appointment'.
      *
@@ -111,8 +111,7 @@ public class Validation {
         throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_LATEST_OR_DELETE_FILTER);
     }
 
-
-    // @@author j013n3
+    //@@author j013n3
     /**
      * Validates the BMI details entered.
      *
@@ -152,6 +151,7 @@ public class Validation {
      * Validates the period details entered.
      *
      * @param periodDetails An array of strings with split period details.
+     * @param isParser A boolean indicating whether the input comes from Parser.
      * @throws CustomExceptions.InvalidInput If there are any errors in the details entered.
      * @throws CustomExceptions.InsufficientInput If there are empty parameters specified.
      */
@@ -216,7 +216,6 @@ public class Validation {
     }
 
     //@@author JustinSoh
-
     /**
      * Validates the gym details entered.
      *
@@ -229,9 +228,7 @@ public class Validation {
         if (isEmptyParameterPresent(gymDetails)) {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_GYM_PARAMETERS_ERROR);
         }
-
-        if (!gymDetails[WorkoutConstant.GYM_NUMBER_OF_STATIONS_INDEX]
-                .matches(UiConstant.VALID_POSITIVE_INTEGER_REGEX)) {
+        if (!validateIntegerIsPositive(gymDetails[WorkoutConstant.GYM_NUMBER_OF_STATIONS_INDEX])) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_NUMBER_OF_STATIONS_ERROR);
         }
 
@@ -243,30 +240,6 @@ public class Validation {
         if (validateDateNotEmpty(gymDetails[WorkoutConstant.GYM_DATE_INDEX])) {
             validateDateInput(gymDetails[WorkoutConstant.GYM_DATE_INDEX]);
             validateDateNotAfterToday(gymDetails[WorkoutConstant.GYM_DATE_INDEX]);
-        }
-    }
-
-    //@@author rouvinerh
-
-    /**
-     * Validates that time is in HH:MM 24 hours format, and if it is a valid time.
-     *
-     * @param time The {@code String} time to check.
-     * @throws CustomExceptions.InvalidInput If time is formatted wrongly or is not valid.
-     */
-    protected void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
-        if (!time.matches(UiConstant.VALID_TIME_REGEX)) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ACTUAL_TIME_ERROR);
-        }
-        String [] parts = time.split(UiConstant.SPLIT_BY_COLON);
-        int hours = Integer.parseInt(parts[UiConstant.SPLIT_TIME_HOUR_INDEX]);
-        int minutes = Integer.parseInt(parts[UiConstant.SPLIT_TIME_MINUTES_INDEX]);
-
-        if (hours < UiConstant.MIN_HOURS || hours > UiConstant.MAX_HOURS) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ACTUAL_TIME_HOUR_ERROR);
-        }
-        if (minutes < UiConstant.MIN_MINUTES || minutes > UiConstant.MAX_MINUTES) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ACTUAL_TIME_MINUTE_ERROR);
         }
     }
 
@@ -297,37 +270,7 @@ public class Validation {
         }
     }
 
-
     //@@author rouvinerh
-    /**
-     * Checks whether the list of input details contains any empty strings.
-     *
-     * @param input A list of strings representing command inputs.
-     * @return False if it contains empty strings. Otherwise, returns true.
-     */
-    protected boolean isEmptyParameterPresent(String[] input) {
-        for (String s : input) {
-            if (s != null && s.isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Validates whether the date specified is after today. Throws an error if it is.
-     *
-     * @param dateString A string representing the date.
-     * @throws CustomExceptions.InvalidInput If the date specified is after today.
-     */
-    protected void validateDateNotAfterToday(String dateString) throws CustomExceptions.InvalidInput {
-        Parser parser = new Parser();
-        LocalDate date = parser.parseDate(dateString);
-        if (date.isAfter(LocalDate.now())) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.DATE_IN_FUTURE_ERROR);
-        }
-    }
-
     /**
      * Checks whether the username has only alphanumeric characters and spaces.
      *
@@ -339,7 +282,7 @@ public class Validation {
     }
 
     /**
-     * Checks whether date is set to {@code null} or 'NA'. Both cases mean date is not specified.
+     * Checks whether date is set to null or 'NA'. Both cases mean date is not specified.
      *
      * @param date The date string to check.
      * @return Returns true if date is specified, otherwise returns false.
@@ -412,6 +355,7 @@ public class Validation {
         }
     }
 
+    //@@author rouvinerh
     /**
      * Checks whether current directory is readable and writable. If no, print exception and exit bot.
      * If yes, do nothing.
@@ -426,6 +370,7 @@ public class Validation {
         }
     }
 
+    //@@author j013n3
     /**
      * Validates whether the specified date can be found in HealthList and throws error if it is.
      *
@@ -442,12 +387,13 @@ public class Validation {
         }
     }
 
+    //@@author JustinSoh
     /**
      * Validates whether the current index provided is within the start and end.
      *
      * @param index The index to be validated.
      * @param start The starting bound.
-     * @param end the ending bound (exclusive - e.g. end = 5 means index must be < 5).
+     * @param end the ending bound (exclusive - e.g. end = 5 means index must be less than 5).
      * @return true if the index is within the bounds, false otherwise.
      */
     public static boolean validateIndexWithinBounds(int index, int start, int end) {
@@ -456,5 +402,58 @@ public class Validation {
 
     public static boolean validateIntegerIsPositive(String value) {
         return value.matches(UiConstant.VALID_POSITIVE_INTEGER_REGEX);
+    }
+
+    //@@author rouvinerh
+    /**
+     * Validates that time is in HH:MM 24 hours format, and if it is a valid time.
+     *
+     * @param time The String time to check.
+     * @throws CustomExceptions.InvalidInput If time is formatted wrongly or is not valid.
+     */
+    protected void validateTimeInput(String time) throws CustomExceptions.InvalidInput {
+        if (!time.matches(UiConstant.VALID_TIME_REGEX)) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ACTUAL_TIME_ERROR);
+        }
+        String [] parts = time.split(UiConstant.SPLIT_BY_COLON);
+        int hours = Integer.parseInt(parts[UiConstant.SPLIT_TIME_HOUR_INDEX]);
+        int minutes = Integer.parseInt(parts[UiConstant.SPLIT_TIME_MINUTES_INDEX]);
+
+        if (hours < UiConstant.MIN_HOURS || hours > UiConstant.MAX_HOURS) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ACTUAL_TIME_HOUR_ERROR);
+        }
+        if (minutes < UiConstant.MIN_MINUTES || minutes > UiConstant.MAX_MINUTES) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_ACTUAL_TIME_MINUTE_ERROR);
+        }
+    }
+
+    //@@author rouvinerh
+    /**
+     * Checks whether the list of input details contains any empty strings.
+     *
+     * @param input A list of strings representing command inputs.
+     * @return False if it contains empty strings. Otherwise, returns true.
+     */
+    protected boolean isEmptyParameterPresent(String[] input) {
+        for (String s : input) {
+            if (s != null && s.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Validates whether the date specified is after today. Throws an error if it is.
+     *
+     * @param dateString A string representing the date.
+     * @throws CustomExceptions.InvalidInput If the date specified is after today.
+     */
+    protected void validateDateNotAfterToday(String dateString) throws CustomExceptions.InvalidInput {
+        Parser parser = new Parser();
+        LocalDate date = parser.parseDate(dateString);
+        if (date.isAfter(LocalDate.now())) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.DATE_IN_FUTURE_ERROR);
+        }
     }
 }

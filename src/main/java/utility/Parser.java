@@ -44,23 +44,6 @@ public class Parser {
     }
 
     //@@author rouvinerh
-
-    /**
-     * Counts the number of '/' characters there are in a given string.
-     *
-     * @param input The user input string.
-     * @return An integer representing the number of '/' characters there are.
-     */
-    private int countForwardSlash(String input) {
-        int count = 0;
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '/') {
-                count++;
-            }
-        }
-        return count;
-    }
-
     /**
      * Parses and converts String date to a LocalDate variable.
      *
@@ -95,7 +78,6 @@ public class Parser {
     }
 
     //@@author syj02
-
     /**
      * Parses and converts String time to a LocalDate variable.
      *
@@ -115,33 +97,6 @@ public class Parser {
     }
 
     //@@author rouvinerh
-
-    /**
-     * Splits user input for Delete command into item and index.
-     *
-     * @param input The user input string.
-     * @return An array of strings containing the extracted delete command parameters.
-     * @throws CustomExceptions.InsufficientInput If not enough parameters are specified.
-     * @throws CustomExceptions.InvalidInput If there is invalid input.
-     */
-    protected String[] splitDeleteInput(String input) throws CustomExceptions.InsufficientInput,
-            CustomExceptions.InvalidInput {
-        if (!input.contains(UiConstant.ITEM_FLAG) || !input.contains(UiConstant.INDEX_FLAG)) {
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_DELETE_PARAMETERS_ERROR);
-        }
-
-        if (countForwardSlash(input) > UiConstant.NUM_OF_SLASHES_FOR_DELETE) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
-        }
-
-        String[] results = new String[UiConstant.NUM_DELETE_PARAMETERS];
-        results[UiConstant.DELETE_ITEM_STRING_INDEX] = extractSubstringFromSpecificIndex(input,
-                UiConstant.ITEM_FLAG).trim();
-        results[UiConstant.DELETE_ITEM_NUMBER_INDEX] = extractSubstringFromSpecificIndex(input,
-                UiConstant.INDEX_FLAG).trim();
-        return results;
-    }
-
     /**
      * Parses and validates user input for the delete command. Returns an array of parsed user input
      * containing the filter string and the index to delete.
@@ -161,7 +116,6 @@ public class Parser {
     }
 
     //@@author JustinSoh
-
     /**
      * Function validates and parses the user input for the history command.
      *
@@ -187,7 +141,6 @@ public class Parser {
     }
 
     //@@author JustinSoh
-
     /**
      * Function validates and parses the user input for the latest command.
      *
@@ -213,7 +166,6 @@ public class Parser {
     }
 
     //@@author syj02
-
     /**
      * Parses input for Bmi command. Adds Bmi object to HealthList if valid.
      *
@@ -233,38 +185,7 @@ public class Parser {
         LogFile.writeLog("Added BMI", false);
     }
 
-    /**
-     * Split user input for Bmi command, height, weight and date.
-     *
-     * @param input The user input string.
-     * @return An array of strings containing the extracted Bmi parameters.
-     * @throws CustomExceptions.InsufficientInput If the height, weight or date parameters are missing.
-     */
-    protected String[] splitBmiInput(String input) throws CustomExceptions.InsufficientInput,
-            CustomExceptions.InvalidInput {
-
-        if (!input.contains(HealthConstant.HEIGHT_FLAG)
-                || !input.contains(HealthConstant.WEIGHT_FLAG)
-                || !input.contains(HealthConstant.DATE_FLAG)) {
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
-        }
-
-        if (countForwardSlash(input) > HealthConstant.NUM_OF_SLASHES_FOR_BMI) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
-        }
-
-        String[] results = new String[HealthConstant.NUM_BMI_PARAMETERS];
-        results[HealthConstant.BMI_HEIGHT_INDEX] = extractSubstringFromSpecificIndex(input,
-                HealthConstant.HEIGHT_FLAG).trim();
-        results[HealthConstant.BMI_WEIGHT_INDEX] = extractSubstringFromSpecificIndex(input,
-                HealthConstant.WEIGHT_FLAG).trim();
-        results[HealthConstant.BMI_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
-                HealthConstant.DATE_FLAG).trim();
-        return results;
-    }
-
     //@@author j013n3
-
     /**
      * Parses input for Period command. Adds Period object to HealthList if valid.
      *
@@ -302,40 +223,6 @@ public class Parser {
     }
 
     /**
-     * Split user input into Period command, start date and end date.
-     *
-     * @param input The user input string.
-     * @return An array of strings containing the extracted Period parameters.
-     * @throws CustomExceptions.InsufficientInput If the user input is invalid or blank.
-     */
-    protected String[] splitPeriodInput(String input) throws CustomExceptions.InsufficientInput,
-            CustomExceptions.InvalidInput {
-        if (!input.contains(HealthConstant.START_FLAG)
-                || (!input.contains(HealthConstant.START_FLAG) && !input.contains(HealthConstant.END_FLAG))) {
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
-        }
-
-        if (countForwardSlash(input) > HealthConstant.NUM_OF_SLASHES_FOR_PERIOD) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
-        }
-
-        String[] results = new String[HealthConstant.NUM_PERIOD_PARAMETERS];
-
-        if (input.contains(HealthConstant.START_FLAG) && input.contains(HealthConstant.END_FLAG)) {
-            results[HealthConstant.PERIOD_START_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
-                    HealthConstant.START_FLAG).trim();
-            results[HealthConstant.PERIOD_END_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
-                    HealthConstant.END_FLAG).trim();
-        } else if (input.contains(HealthConstant.START_FLAG) && !input.contains(HealthConstant.END_FLAG)) {
-            results[HealthConstant.PERIOD_START_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
-                    HealthConstant.START_FLAG).trim();
-        }
-
-        return results;
-    }
-
-
-    /**
      * Parses input for Prediction command.
      * Prints period prediction if possible.
      *
@@ -353,37 +240,7 @@ public class Parser {
         }
     }
 
-    //@@author syj02
-
-    /**
-     * Split user input into Appointment command, date, time and description.
-     *
-     * @param input The user input string.
-     * @return An array of strings containing the extracted Appointment parameters.
-     * @throws CustomExceptions.InsufficientInput If the user input is invalid or blank.
-     */
-    protected String[] splitAppointmentDetails(String input)
-            throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
-        String[] results = new String[HealthConstant.NUM_APPOINTMENT_PARAMETERS];
-        if (!input.contains(HealthConstant.DATE_FLAG)
-                || !input.contains(HealthConstant.TIME_FLAG)
-                || !input.contains(HealthConstant.DESCRIPTION_FLAG)) {
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
-        }
-
-        if (countForwardSlash(input) > HealthConstant.NUM_OF_SLASHES_FOR_APPOINTMENT) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
-        }
-
-        results[HealthConstant.APPOINTMENT_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
-                HealthConstant.DATE_FLAG).trim();
-        results[HealthConstant.APPOINTMENT_TIME_INDEX] = extractSubstringFromSpecificIndex(input,
-                HealthConstant.TIME_FLAG).trim();
-        results[HealthConstant.APPOINTMENT_DESCRIPTION_INDEX] = extractSubstringFromSpecificIndex(input,
-                HealthConstant.DESCRIPTION_FLAG).trim();
-        return results;
-    }
-
+    //@@author syj_02
     /**
      * Parses input for Appointment command. Adds Appointment object to HealthList if valid.
      *
@@ -404,7 +261,6 @@ public class Parser {
     }
 
     //@@author L5-Z
-
     /**
      * Extracts a substring from the given input string based on the provided delimiter.
      *
@@ -426,39 +282,6 @@ public class Parser {
     }
 
     //@@author JustinSoh
-
-    /**
-     * Splits the user input when adding a Gym.
-     *
-     * @param input The user input string.
-     * @return The Gym parameters split from the user input.
-     * @throws CustomExceptions.InsufficientInput If the number of stations is missing.
-     */
-    protected String[] splitGymInput(String input) throws CustomExceptions.InsufficientInput,
-            CustomExceptions.InvalidInput {
-        if (!input.contains(WorkoutConstant.NUMBER_OF_STATIONS_FLAG)) {
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_GYM_PARAMETERS_ERROR);
-        }
-
-        if (countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_GYM_WITH_DATE &&
-                countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_GYM_WITHOUT_DATE) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
-        }
-
-
-        String[] results = new String[WorkoutConstant.NUMBER_OF_GYM_PARAMETERS];
-        results[WorkoutConstant.GYM_NUMBER_OF_STATIONS_INDEX] = extractSubstringFromSpecificIndex(input,
-                WorkoutConstant.NUMBER_OF_STATIONS_FLAG).trim();
-
-        if (input.contains(WorkoutConstant.DATE_FLAG)) {
-            results[WorkoutConstant.GYM_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
-                    WorkoutConstant.DATE_FLAG).trim();
-        }
-        return results;
-    }
-
-    //@@author JustinSoh
-
     /**
      * Parses input for the Gym command. Adds Gym object if valid.
      *
@@ -482,42 +305,6 @@ public class Parser {
     }
 
     //@@author rouvinerh
-
-    /**
-     * Splits the user input for adding a run.
-     *
-     * @param input The user input string.
-     * @return The Run parameters split from the user input in an array of strings.
-     * @throws CustomExceptions.InsufficientInput If the distance and time taken for the run are missing.
-     * @throws CustomExceptions.InvalidInput If the parameters specified are invalid.
-     */
-    protected String[] splitRunInput(String input) throws CustomExceptions.InsufficientInput,
-            CustomExceptions.InvalidInput {
-        if (!input.contains(WorkoutConstant.DISTANCE_FLAG) ||
-                !input.contains(WorkoutConstant.RUN_TIME_FLAG)) {
-            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_RUN_PARAMETERS_ERROR);
-        }
-
-        if (countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_RUN_WITH_DATE &&
-                countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_RUN_WITHOUT_DATE) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
-        }
-
-        String[] results = new String[WorkoutConstant.NUMBER_OF_RUN_PARAMETERS];
-        results[WorkoutConstant.RUN_TIME_INDEX] = extractSubstringFromSpecificIndex(input,
-                WorkoutConstant.RUN_TIME_FLAG).trim();
-        results[WorkoutConstant.RUN_DISTANCE_INDEX] = extractSubstringFromSpecificIndex(input,
-                WorkoutConstant.DISTANCE_FLAG).trim();
-
-        if (input.contains(WorkoutConstant.DATE_FLAG)) {
-            results[WorkoutConstant.RUN_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
-                    WorkoutConstant.DATE_FLAG).trim();
-        }
-        return results;
-    }
-
-    //@@author JustinSoh
-
     /**
      * Parses input for the Run command. Adds a Run object if valid.
      *
@@ -544,38 +331,10 @@ public class Parser {
         LogFile.writeLog("Added Run", false);
     }
 
-    /**
-     * Splits user input for gym station.
-     *
-     * @param input The user input string.
-     * @return An array of strings containing gym station parameters.
-     * @throws CustomExceptions.InvalidInput If the parameters are invalid.
-     */
-    protected String[] splitGymStationInput(String input) throws CustomExceptions.InvalidInput {
-
-        if (countForwardSlash(input) > WorkoutConstant.NUM_OF_SLASHES_FOR_GYM_STATION) {
-            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
-        }
-
-        Parser parser = new Parser();
-        String exerciseName = input.split(UiConstant.SPLIT_BY_SLASH)[WorkoutConstant.STATION_NAME_INDEX].trim();
-        String sets = parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.SETS_FLAG).trim();
-        String reps = parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.REPS_FLAG).trim();
-        String weights = parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.WEIGHTS_FLAG).trim();
-
-
-        String[] validatedGymStationInputs = new String[WorkoutConstant.NUMBER_OF_GYM_STATION_PARAMETERS];
-        validatedGymStationInputs[WorkoutConstant.GYM_STATION_NAME_INDEX] = exerciseName;
-        validatedGymStationInputs[WorkoutConstant.GYM_STATION_SET_INDEX] = sets;
-        validatedGymStationInputs[WorkoutConstant.GYM_STATION_REPS_INDEX] = reps;
-        validatedGymStationInputs[WorkoutConstant.GYM_STATION_WEIGHTS_INDEX] = weights;
-        return validatedGymStationInputs;
-    }
-
-
+    //@@author JustinSoh
     /**
      * Parses the gym station input from the user and adds it to the Gym object.
-     * This method is used in the {@code parseGymInput} method.
+     * This method is used in the parseGymInput method.
      * User can input 'back' to exit the gym station input.
      * The gym object will be deleted and control returned to handler.
      *
@@ -616,8 +375,261 @@ public class Parser {
         LogFile.writeLog("Added Gym", false);
     }
 
-    //@@author L5-Z
+    /**
+     * Parses the gym input from the storage file and returns a Gym object.
+     * The input of the storage file needs to be in the following format
+     * gym:NUM_STATIONS:DATE:STATION1_NAME:NUM_SETS:REPS:WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4
+     * :STATION2_NAME:NUM_SETS:REPS:WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4 ....
+     *
+     * @param input The line read from the file.
+     * @return New gym object created from the input.
+     * @throws CustomExceptions.InvalidInput  If there is invalid input from the file.
+     * @throws CustomExceptions.InsufficientInput If there is insufficient input from the file.
+     * @throws CustomExceptions.FileReadError If the file data is invalid or cannot be read.
+     */
+    public Gym parseGymFileInput(String input)
+            throws CustomExceptions.InvalidInput,
+            CustomExceptions.FileReadError, CustomExceptions.InsufficientInput {
 
+        String[] gymDetails = splitGymFileInput(input);
+        String[] checkGymDetails = new String[WorkoutConstant.NUMBER_OF_GYM_PARAMETERS];
+        checkGymDetails[0] = gymDetails[1];
+        checkGymDetails[1] = gymDetails[2];
+        validation.validateGymInput(checkGymDetails);
+        Gym gym;
+        String date = gymDetails[WorkoutConstant.DATE_FILE_INDEX];
+
+        if (date.equals(ErrorConstant.NO_DATE_SPECIFIED_ERROR)) {
+            gym = new Gym();
+        } else {
+            gym = new Gym(date);
+        }
+
+        int counter = WorkoutConstant.GYM_FILE_BASE_COUNTER;
+        while (counter < gymDetails.length) {
+            counter = addStationFromFile(gym, gymDetails, counter);
+        }
+        return gym;
+    }
+
+    //@@author rouvinerh
+    /**
+     * Splits user input for Delete command into item and index.
+     *
+     * @param input The user input string.
+     * @return An array of strings containing the extracted delete command parameters.
+     * @throws CustomExceptions.InsufficientInput If not enough parameters are specified.
+     * @throws CustomExceptions.InvalidInput If there is invalid input.
+     */
+    protected String[] splitDeleteInput(String input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+        if (!input.contains(UiConstant.ITEM_FLAG) || !input.contains(UiConstant.INDEX_FLAG)) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_DELETE_PARAMETERS_ERROR);
+        }
+
+        if (countForwardSlash(input) > UiConstant.NUM_OF_SLASHES_FOR_DELETE) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
+        }
+
+        String[] results = new String[UiConstant.NUM_DELETE_PARAMETERS];
+        results[UiConstant.DELETE_ITEM_STRING_INDEX] = extractSubstringFromSpecificIndex(input,
+                UiConstant.ITEM_FLAG).trim();
+        results[UiConstant.DELETE_ITEM_NUMBER_INDEX] = extractSubstringFromSpecificIndex(input,
+                UiConstant.INDEX_FLAG).trim();
+        return results;
+    }
+
+    //@@author JustinSoh
+    /**
+     * Splits user input for gym station.
+     *
+     * @param input The user input string.
+     * @return An array of strings containing gym station parameters.
+     * @throws CustomExceptions.InvalidInput If the parameters are invalid.
+     */
+    protected String[] splitGymStationInput(String input) throws CustomExceptions.InvalidInput {
+        if (countForwardSlash(input) > WorkoutConstant.NUM_OF_SLASHES_FOR_GYM_STATION) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
+        }
+        Parser parser = new Parser();
+        String exerciseName = input.split(UiConstant.SPLIT_BY_SLASH)[WorkoutConstant.STATION_NAME_INDEX].trim();
+        String sets = parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.SETS_FLAG).trim();
+        String reps = parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.REPS_FLAG).trim();
+        String weights = parser.extractSubstringFromSpecificIndex(input, WorkoutConstant.WEIGHTS_FLAG).trim();
+
+
+        String[] validatedGymStationInputs = new String[WorkoutConstant.NUMBER_OF_GYM_STATION_PARAMETERS];
+        validatedGymStationInputs[WorkoutConstant.GYM_STATION_NAME_INDEX] = exerciseName;
+        validatedGymStationInputs[WorkoutConstant.GYM_STATION_SET_INDEX] = sets;
+        validatedGymStationInputs[WorkoutConstant.GYM_STATION_REPS_INDEX] = reps;
+        validatedGymStationInputs[WorkoutConstant.GYM_STATION_WEIGHTS_INDEX] = weights;
+        return validatedGymStationInputs;
+    }
+
+    //@@author rouvinerh
+    /**
+     * Splits the user input for adding a run.
+     *
+     * @param input The user input string.
+     * @return The Run parameters split from the user input in an array of strings.
+     * @throws CustomExceptions.InsufficientInput If the distance and time taken for the run are missing.
+     * @throws CustomExceptions.InvalidInput If the parameters specified are invalid.
+     */
+    protected String[] splitRunInput(String input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+        if (!input.contains(WorkoutConstant.DISTANCE_FLAG) ||
+                !input.contains(WorkoutConstant.RUN_TIME_FLAG)) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_RUN_PARAMETERS_ERROR);
+        }
+
+        if (countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_RUN_WITH_DATE &&
+                countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_RUN_WITHOUT_DATE) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
+        }
+
+        String[] results = new String[WorkoutConstant.NUMBER_OF_RUN_PARAMETERS];
+        results[WorkoutConstant.RUN_TIME_INDEX] = extractSubstringFromSpecificIndex(input,
+                WorkoutConstant.RUN_TIME_FLAG).trim();
+        results[WorkoutConstant.RUN_DISTANCE_INDEX] = extractSubstringFromSpecificIndex(input,
+                WorkoutConstant.DISTANCE_FLAG).trim();
+
+        if (input.contains(WorkoutConstant.DATE_FLAG)) {
+            results[WorkoutConstant.RUN_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
+                    WorkoutConstant.DATE_FLAG).trim();
+        }
+        return results;
+    }
+
+    //@@author JustinSoh
+    /**
+     * Splits the user input when adding a Gym.
+     *
+     * @param input The user input string.
+     * @return The Gym parameters split from the user input.
+     * @throws CustomExceptions.InsufficientInput If the number of stations is missing.
+     * @throws CustomExceptions.InvalidInput If the parameters specified are invalid.
+     */
+    protected String[] splitGymInput(String input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+        if (!input.contains(WorkoutConstant.NUMBER_OF_STATIONS_FLAG)) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_GYM_PARAMETERS_ERROR);
+        }
+
+        if (countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_GYM_WITH_DATE &&
+                countForwardSlash(input) != WorkoutConstant.NUM_OF_SLASHES_FOR_GYM_WITHOUT_DATE) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
+        }
+
+
+        String[] results = new String[WorkoutConstant.NUMBER_OF_GYM_PARAMETERS];
+        results[WorkoutConstant.GYM_NUMBER_OF_STATIONS_INDEX] = extractSubstringFromSpecificIndex(input,
+                WorkoutConstant.NUMBER_OF_STATIONS_FLAG).trim();
+
+        if (input.contains(WorkoutConstant.DATE_FLAG)) {
+            results[WorkoutConstant.GYM_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
+                    WorkoutConstant.DATE_FLAG).trim();
+        }
+        return results;
+    }
+
+    //@@author syj02
+    /**
+     * Split user input into Appointment command, date, time and description.
+     *
+     * @param input The user input string.
+     * @return An array of strings containing the extracted Appointment parameters.
+     * @throws CustomExceptions.InsufficientInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid.
+     */
+    protected String[] splitAppointmentDetails(String input)
+            throws CustomExceptions.InsufficientInput, CustomExceptions.InvalidInput {
+        String[] results = new String[HealthConstant.NUM_APPOINTMENT_PARAMETERS];
+        if (!input.contains(HealthConstant.DATE_FLAG)
+                || !input.contains(HealthConstant.TIME_FLAG)
+                || !input.contains(HealthConstant.DESCRIPTION_FLAG)) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_APPOINTMENT_PARAMETERS_ERROR);
+        }
+
+        if (countForwardSlash(input) > HealthConstant.NUM_OF_SLASHES_FOR_APPOINTMENT) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
+        }
+
+        results[HealthConstant.APPOINTMENT_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
+                HealthConstant.DATE_FLAG).trim();
+        results[HealthConstant.APPOINTMENT_TIME_INDEX] = extractSubstringFromSpecificIndex(input,
+                HealthConstant.TIME_FLAG).trim();
+        results[HealthConstant.APPOINTMENT_DESCRIPTION_INDEX] = extractSubstringFromSpecificIndex(input,
+                HealthConstant.DESCRIPTION_FLAG).trim();
+        return results;
+    }
+
+    /**
+     * Split user input for Bmi command, height, weight and date.
+     *
+     * @param input The user input string.
+     * @return An array of strings containing the extracted Bmi parameters.
+     * @throws CustomExceptions.InsufficientInput If the height, weight or date parameters are missing.
+     * @throws CustomExceptions.InvalidInput If the input is invalid.
+     */
+    protected String[] splitBmiInput(String input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+
+        if (!input.contains(HealthConstant.HEIGHT_FLAG)
+                || !input.contains(HealthConstant.WEIGHT_FLAG)
+                || !input.contains(HealthConstant.DATE_FLAG)) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_BMI_PARAMETERS_ERROR);
+        }
+
+        if (countForwardSlash(input) > HealthConstant.NUM_OF_SLASHES_FOR_BMI) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
+        }
+
+        String[] results = new String[HealthConstant.NUM_BMI_PARAMETERS];
+        results[HealthConstant.BMI_HEIGHT_INDEX] = extractSubstringFromSpecificIndex(input,
+                HealthConstant.HEIGHT_FLAG).trim();
+        results[HealthConstant.BMI_WEIGHT_INDEX] = extractSubstringFromSpecificIndex(input,
+                HealthConstant.WEIGHT_FLAG).trim();
+        results[HealthConstant.BMI_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
+                HealthConstant.DATE_FLAG).trim();
+        return results;
+    }
+
+    //@@author j013n3
+    /**
+     * Split user input into Period command, start date and end date.
+     *
+     * @param input The user input string.
+     * @return An array of strings containing the extracted Period parameters.
+     * @throws CustomExceptions.InsufficientInput If the user input is invalid or blank.
+     * @throws CustomExceptions.InvalidInput If the user input is invalid.
+     */
+    protected String[] splitPeriodInput(String input) throws CustomExceptions.InsufficientInput,
+            CustomExceptions.InvalidInput {
+        if (!input.contains(HealthConstant.START_FLAG)
+                || (!input.contains(HealthConstant.START_FLAG) && !input.contains(HealthConstant.END_FLAG))) {
+            throw new CustomExceptions.InsufficientInput(ErrorConstant.INSUFFICIENT_PERIOD_PARAMETERS_ERROR);
+        }
+
+        if (countForwardSlash(input) > HealthConstant.NUM_OF_SLASHES_FOR_PERIOD) {
+            throw new CustomExceptions.InvalidInput(ErrorConstant.TOO_MANY_SLASHES_ERROR);
+        }
+
+        String[] results = new String[HealthConstant.NUM_PERIOD_PARAMETERS];
+
+        if (input.contains(HealthConstant.START_FLAG) && input.contains(HealthConstant.END_FLAG)) {
+            results[HealthConstant.PERIOD_START_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
+                    HealthConstant.START_FLAG).trim();
+            results[HealthConstant.PERIOD_END_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
+                    HealthConstant.END_FLAG).trim();
+        } else if (input.contains(HealthConstant.START_FLAG) && !input.contains(HealthConstant.END_FLAG)) {
+            results[HealthConstant.PERIOD_START_DATE_INDEX] = extractSubstringFromSpecificIndex(input,
+                    HealthConstant.START_FLAG).trim();
+        }
+
+        return results;
+    }
+
+    //@@author L5-Z
     /**
      * Splits the Gym input that comes from the data file.
      * Validates the numberOfStation and date input.
@@ -673,9 +685,10 @@ public class Parser {
         return gymDetails;
     }
 
+    //@@author JustinSoh
     /**
      * Adds a station to the gym object based of the file input.
-     * This method is used in the {@code parseGymFileInput} method.
+     * This method is used in the parseGymFileInput method.
      * How the method works is that it will check if the station details are valid
      * and then add the station to the gym.
      *
@@ -687,7 +700,6 @@ public class Parser {
      */
     private int addStationFromFile(Gym gym, String[] gymDetails, int baseCounter)
             throws CustomExceptions.InvalidInput, CustomExceptions.InsufficientInput {
-
         String currentStationName;
         String numberOfSetsStr;
         String repsStr;
@@ -706,41 +718,22 @@ public class Parser {
         return baseCounter;
     }
 
+    //@@author rouvinerh
 
     /**
-     * Parses the gym input from the storage file and returns a Gym object.
-     * The input of the storage file needs to be in the following format
-     * gym:NUM_STATIONS:DATE:STATION1_NAME:NUM_SETS:REPS:WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4
-     * :STATION2_NAME:NUM_SETS:REPS:WEIGHT1,WEIGHT2,WEIGHT3,WEIGHT4 ....
+     * Counts the number of '/' characters there are in a given string.
      *
-     * @param input The line read from the file.
-     * @return New gym object created from the input.
-     * @throws CustomExceptions.InvalidInput  If there is invalid input from the file.
-     * @throws CustomExceptions.FileReadError If the file data is invalid or cannot be read.
+     * @param input The user input string.
+     * @return An integer representing the number of '/' characters there are.
      */
-    public Gym parseGymFileInput(String input)
-            throws CustomExceptions.InvalidInput,
-            CustomExceptions.FileReadError, CustomExceptions.InsufficientInput {
-
-        String[] gymDetails = splitGymFileInput(input);
-        String[] checkGymDetails = new String[WorkoutConstant.NUMBER_OF_GYM_PARAMETERS];
-        checkGymDetails[0] = gymDetails[1];
-        checkGymDetails[1] = gymDetails[2];
-        validation.validateGymInput(checkGymDetails);
-        Gym gym;
-        String date = gymDetails[WorkoutConstant.DATE_FILE_INDEX];
-
-        if (date.equals(ErrorConstant.NO_DATE_SPECIFIED_ERROR)) {
-            gym = new Gym();
-        } else {
-            gym = new Gym(date);
+    private int countForwardSlash(String input) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '/') {
+                count++;
+            }
         }
-
-        int counter = WorkoutConstant.GYM_FILE_BASE_COUNTER;
-        while (counter < gymDetails.length) {
-            counter = addStationFromFile(gym, gymDetails, counter);
-        }
-        return gym;
+        return count;
     }
 
 }

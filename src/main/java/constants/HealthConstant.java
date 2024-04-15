@@ -5,13 +5,9 @@ package constants;
  * It includes headers, flags, parameters, thresholds, formatted strings/messages, and split indices.
  */
 public class HealthConstant {
-
-    // Headers
     public static final String BMI = "bmi";
     public static final String PERIOD = "period";
     public static final String APPOINTMENT = "appointment";
-
-    // Flags
     public static final String HEALTH_FLAG = "/h:";
     public static final String HEIGHT_FLAG = "/height:";
     public static final String WEIGHT_FLAG = "/weight:";
@@ -20,13 +16,9 @@ public class HealthConstant {
     public static final String END_FLAG = "/end:";
     public static final String TIME_FLAG = "/time:";
     public static final String DESCRIPTION_FLAG = "/description:";
-
-    // Parameters
     public static final Integer NUM_BMI_PARAMETERS = 3;
     public static final Integer NUM_PERIOD_PARAMETERS = 2;
     public static final Integer NUM_APPOINTMENT_PARAMETERS = 3;
-
-    // Threshold
     public static final double UNDERWEIGHT_BMI_THRESHOLD = 18.5;
     public static final double NORMAL_BMI_THRESHOLD = 25.0;
     public static final double OVERWEIGHT_BMI_THRESHOLD = 30.0;
@@ -36,9 +28,6 @@ public class HealthConstant {
     public static final double MAX_HEIGHT = 2.75;
     public static final double MAX_WEIGHT = 640;
     public static final double MIN_BMI = 0;
-
-    // Formatted Strings/Messages
-    // BMI
     public static final String LOG_DELETE_BMI_FORMAT = "Removed BMI entry of %.2f from %s";
     public static final String TWO_DECIMAL_PLACE_FORMAT = "%.2f";
     public static final String BMI_ADDED_MESSAGE_PREFIX = "Added: bmi | ";
@@ -49,8 +38,6 @@ public class HealthConstant {
     public static final String OBESE_MESSAGE = "You're obese.";
     public static final String SEVERELY_OBESE_MESSAGE = "You're severely obese.";
     public static final String BMI_HISTORY_HEADER = "Your BMI history:";
-
-    // PERIOD
     public static final int MIN_SIZE_FOR_COMPARISON = 1;
     public static final String PRINT_PERIOD_FORMAT = "Period Start: %s Period End: %s"
             + System.lineSeparator()
@@ -66,8 +53,6 @@ public class HealthConstant {
     public static final String PERIOD_HISTORY_HEADER = "Your Period history:";
     public static final String PERIOD_TOO_LONG_MESSAGE = "Your period length is out of the healthy range. " +
             "Please consult a gynaecologist if this persists.";
-
-    // PREDICTION
     public static final String PRINT_CYCLE_FORMAT = "Cycle Length: %d day(s)";
     public static final Integer LATEST_THREE_CYCLE_LENGTHS = 3;
     public static final Integer FIRST_CYCLE_INDEX = 3;
@@ -79,16 +64,12 @@ public class HealthConstant {
     public static final String PERIOD_IS_LATE = ". Your period is late by ";
     public static final String PREDICTED_DATE_IS_TODAY_MESSAGE = ", which is today! ";
     public static final String DAYS_MESSAGE = "day(s)";
-
-    // APPOINTMENT
     public static final String PRINT_APPOINTMENT_FORMAT = "On %s at %s: %s";
     public static final String LOG_DELETE_APPOINTMENT_FORMAT = "Removed appointment on %s at %s: %s";
     public static final String APPOINTMENT_ADDED_MESSAGE_PREFIX = "Added: appointment | ";
     public static final String APPOINTMENT_REMOVED_MESSAGE_PREFIX = "Removed appointment with index: ";
     public static final Integer MAX_DESCRIPTION_LENGTH = 100;
     public static final String APPOINTMENT_HISTORY_HEADER = "Your Appointment history:";
-
-    // SPLIT INDEX
     public static final int BMI_HEIGHT_INDEX = 0;
     public static final int BMI_WEIGHT_INDEX = 1;
     public static final int BMI_DATE_INDEX = 2;
@@ -101,7 +82,5 @@ public class HealthConstant {
     public static final int NUM_OF_SLASHES_FOR_PERIOD = 3;
     public static final int NUM_OF_SLASHES_FOR_BMI = 4;
     public static final int NUM_OF_SLASHES_FOR_APPOINTMENT = 4;
-
-    //Latest object
     public static final int FIRST_ITEM = 0;
 }

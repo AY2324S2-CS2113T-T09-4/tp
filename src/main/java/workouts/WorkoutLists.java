@@ -20,7 +20,7 @@ public class WorkoutLists {
     private static final ArrayList<Run> RUNS = new ArrayList<>();
     private static final ArrayList<Gym> GYMS = new ArrayList<>();
 
-    protected WorkoutLists() {
+    public WorkoutLists() {
 
     }
 
@@ -98,7 +98,7 @@ public class WorkoutLists {
     }
 
     /**
-     * Deletes Gym object based on the {@code index} that will be validated.
+     * Deletes Gym object based on the index that will be validated.
      *
      * @param index Index of the Gym object to be deleted.
      * @throws CustomExceptions.OutOfBounds If the index is invalid.
@@ -118,7 +118,7 @@ public class WorkoutLists {
     }
 
     /**
-     * Deletes Run object based on the {@code index} that will be validated.
+     * Deletes Run object based on the index that will be validated.
      *
      * @param index Index of the Run object to be deleted.
      * @throws CustomExceptions.OutOfBounds If the index is invalid.
@@ -151,7 +151,7 @@ public class WorkoutLists {
     /**
      * Only classes within the workouts package can add a new run to the list of runs.
      * This is called automatically when a new run object is created in the Run class.
-     * It will also automatically add the run to the workouts list by calling {@code addWorkout}.
+     * It will also automatically add the run to the workouts list by calling addWorkout.
      *
      * @param run the Run object to be added
      */
@@ -163,7 +163,7 @@ public class WorkoutLists {
     /**
      * Only classes within the workouts package can add a new gym to the list of gyms.
      * This is called automatically when a new gym object is created in the Gym class.
-     * It will also automatically add the gym to the workouts list by calling {@code addWorkout}.
+     * It will also automatically add the gym to the workouts list by calling addWorkout.
      *
      * @param gym the Gym object to be added.
      */
@@ -177,10 +177,9 @@ public class WorkoutLists {
     /**
      * Automatically adds a workout to the list of workouts.
      *
-     * @param workout Workout object to be added to the {@code WORKOUTS} lists.
+     * @param workout Workout object to be added to the WORKOUTS lists.
      */
     private void addWorkout(Workout workout) {
         WORKOUTS.add(workout);
     }
-
 }

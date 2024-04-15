@@ -55,7 +55,7 @@ public class Handler {
 
     //@@author L5-Z
     /**
-     * Processes user input and filters for valid command words from enum {@code Command},
+     * Processes user input and filters for valid command words from enum Command,
      * then creates the relevant object based on details entered.
      *
      * @throws IllegalArgumentException If an error occurs during command processing.

@@ -51,19 +51,6 @@ public class GymStation {
     }
 
     /**
-     * Function which adds a GymSet object to GymStation.
-     *
-     * @param weightsList     The weight done for the particular set.
-     * @param numberOfRepetitions The number of repetitions done for the particular set.
-     */
-    private void processSets(ArrayList<Double> weightsList, int numberOfRepetitions) {
-        for (int i = 0; i < numberOfSets; i++) {
-            GymSet newSet = new GymSet(weightsList.get(i), numberOfRepetitions);
-            sets.add(newSet);
-        }
-    }
-
-    /**
      * Retrieves the station name for the GymStation object.
      *
      * @return String representing the name for the station.
@@ -108,43 +95,6 @@ public class GymStation {
         }
         return returnString.toString();
     }
-
-    /**
-     * Retrieves the string representation of a GymStation object with commas.
-     * E.g. toRepString(",") returns "1,2,3"
-     *
-     * @return A formatted string representing a GymStation object with the specified delimiter.
-     */
-    private String toRepString() {
-        StringBuilder repString = new StringBuilder();
-        for (int i = 0; i < sets.size(); i++) {
-            String currentRep = String.valueOf(sets.get(i).getNumberOfRepetitions());
-            repString.append(currentRep);
-            if (i != sets.size() - 1) {
-                repString.append(UiConstant.SPLIT_BY_COMMAS);
-            }
-        }
-        return repString.toString();
-    }
-
-    /**
-     * Retrieves the string representation of a GymStation object with commas.
-     * E.g. toWeightString(",") returns "10,20,30"
-     *
-     * @return A formatted string representing a GymStation object with the specified delimiter.
-     */
-    private String toWeightString(){
-        StringBuilder weightString = new StringBuilder();
-        for (int i = 0; i < sets.size(); i++) {
-            String currentRep = String.valueOf(sets.get(i).getWeight());
-            weightString.append(currentRep);
-            if (i != sets.size() - 1) {
-                weightString.append(UiConstant.SPLIT_BY_COMMAS);
-            }
-        }
-        return weightString.toString();
-    }
-
 
     // Protected Functions
     /**
@@ -226,6 +176,43 @@ public class GymStation {
         return Integer.parseInt(numberOfSets);
     }
 
+    // Private Methods
+    /**
+     * Retrieves the string representation of a GymStation object with commas.
+     * E.g. toRepString(",") returns "1,2,3"
+     *
+     * @return A formatted string representing a GymStation object with the specified delimiter.
+     */
+    private String toRepString() {
+        StringBuilder repString = new StringBuilder();
+        for (int i = 0; i < sets.size(); i++) {
+            String currentRep = String.valueOf(sets.get(i).getNumberOfRepetitions());
+            repString.append(currentRep);
+            if (i != sets.size() - 1) {
+                repString.append(UiConstant.SPLIT_BY_COMMAS);
+            }
+        }
+        return repString.toString();
+    }
+
+    /**
+     * Retrieves the string representation of a GymStation object with commas.
+     * E.g. toWeightString(",") returns "10,20,30"
+     *
+     * @return A formatted string representing a GymStation object with the specified delimiter.
+     */
+    private String toWeightString(){
+        StringBuilder weightString = new StringBuilder();
+        for (int i = 0; i < sets.size(); i++) {
+            String currentRep = String.valueOf(sets.get(i).getWeight());
+            weightString.append(currentRep);
+            if (i != sets.size() - 1) {
+                weightString.append(UiConstant.SPLIT_BY_COMMAS);
+            }
+        }
+        return weightString.toString();
+    }
+
     /**
      * Validates the number of repetitions ensuring that it is a positive integer.
      *
@@ -242,12 +229,25 @@ public class GymStation {
     }
 
     /**
+     * Function which adds a GymSet object to GymStation.
+     *
+     * @param weightsList     The weight done for the particular set.
+     * @param numberOfRepetitions The number of repetitions done for the particular set.
+     */
+    private void processSets(ArrayList<Double> weightsList, int numberOfRepetitions) {
+        for (int i = 0; i < numberOfSets; i++) {
+            GymSet newSet = new GymSet(weightsList.get(i), numberOfRepetitions);
+            sets.add(newSet);
+        }
+    }
+
+    /**
      * Validates the weight string ensuring that
      * - The weight does not exceed the maximum weight (@code WorkoutConstant.MAX_GYM_WEIGHT)
      * - The weight is a multiple of 0.125 (as that is the increment of weights in a gym)
      *
      * @param weight The string representing the weight
-     * @return boolean true if the weight is valid
+     * @return boolean true  if the weight is valid
      * @throws CustomExceptions.InvalidInput if an invalid weight is passed in
      */
     private boolean validateWeight(String weight) throws CustomExceptions.InvalidInput {
@@ -258,38 +258,72 @@ public class GymStation {
     }
 
 
-    // Private Methods
+    /**
+     * Validates the exercise name ensuring that it is not empty.
+     *
+     * @param exerciseName The name of the exercise.
+     * @throws CustomExceptions.InsufficientInput if the exercise name is empty.
+     */
     private void validateExerciseNameNotEmpty(String exerciseName) throws CustomExceptions.InsufficientInput {
         if (exerciseName.isEmpty()) {
             throw new CustomExceptions.InsufficientInput(ErrorConstant.INVALID_GYM_STATION_EMPTY_NAME_ERROR);
         }
     }
 
+    /**
+     * Validates the exercise name pattern ensuring that it does not contain any special characters.
+     *
+     * @param exerciseName The name of the exercise.
+     * @throws CustomExceptions.InvalidInput if the exercise name does not match the pattern.
+     */
     private void validateExerciseNamePattern(String exerciseName) throws CustomExceptions.InvalidInput {
         if (!exerciseName.matches(UiConstant.VALID_GYM_STATION_NAME_REGEX)) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_GYM_STATION_NAME_ERROR);
         }
     }
 
+    /**
+     * Validates the length of the exercise name.
+     *
+     * @param exerciseName The name of the exercise.
+     * @throws CustomExceptions.InvalidInput if the exercise name exceeds the maximum length.
+     */
     private void validateExerciseNameLength(String exerciseName) throws CustomExceptions.InvalidInput {
         if (exerciseName.length() > WorkoutConstant.MAX_GYM_STATION_NAME_LENGTH) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_GYM_STATION_NAME_ERROR);
         }
     }
 
-
+    /**
+     * Validates that the weight does not exceed the maximum weight.
+     *
+     * @param weight The weight to be validated.
+     * @throws CustomExceptions.InvalidInput if the weight exceeds the maximum weight.
+     */
     private void validateWeightDoesNotExceedMax(double weight) throws CustomExceptions.InvalidInput {
         if (weight > WorkoutConstant.MAX_GYM_WEIGHT) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_WEIGHT_MAX_ERROR);
         }
     }
 
+    /**
+     * Validates that the weight is a multiple of 0.125.
+     *
+     * @param weight The weight to be validated.
+     * @throws CustomExceptions.InvalidInput if the weight is not a multiple of 0.125.
+     */
     private void validateWeightIsMultiple(double weight) throws CustomExceptions.InvalidInput {
         if (weight % WorkoutConstant.WEIGHT_MULTIPLE != 0 ){
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_WEIGHTS_VALUE_ERROR);
         }
     }
 
+    /**
+     * Checks if the number of weights matches the number of sets.
+     * @param weights The list of weights.
+     * @param numberOfSets The number of sets.
+     * @throws CustomExceptions.InvalidInput if the number of weights does not match the number of sets.
+     */
     private void checkIfNumberOfWeightsMatchesSets(ArrayList<Double> weights, int numberOfSets)
             throws CustomExceptions.InvalidInput {
         if (weights.size() != numberOfSets){
@@ -297,6 +331,14 @@ public class GymStation {
         }
     }
 
+    /**
+     * Validates the weight string ensuring that
+     * - The weight string is not empty
+     * - The weight string follows the correct format (UiConstant.VALID_WEIGHTS_ARRAY_REGEX)
+     *
+     * @param weightsString The string representing the weights
+     * @throws CustomExceptions.InvalidInput if an invalid weight string is passed in
+     */
     private void validateWeightString(String weightsString) throws CustomExceptions.InvalidInput {
         if (weightsString.isBlank()) {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_WEIGHTS_EMPTY_ERROR);
@@ -306,8 +348,6 @@ public class GymStation {
             throw new CustomExceptions.InvalidInput(ErrorConstant.INVALID_WEIGHTS_ARRAY_FORMAT_ERROR);
         }
     }
-
-
 }
 
 

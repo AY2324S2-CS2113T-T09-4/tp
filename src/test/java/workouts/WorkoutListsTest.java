@@ -55,7 +55,7 @@ class WorkoutListsTest {
 
 
     /**
-     * Tests the behavior of getting the workout list with {@code RUN} , {@code GYM}, {@code ALL}
+     * Tests the behavior of getting the workout list with RUN , GYM, and ALL.
      * Verifies whether the method is able to correct retrieve the list of workouts.
      */
     @Test
@@ -116,7 +116,7 @@ class WorkoutListsTest {
 
     /**
      * Tests the behavior of getting the latest run from the run list.
-     * Expected behavior is for {@code actual} to equal to the {@code secondRun}
+     * Expected behavior is for actual to equal to the secondRun
      */
     @Test
     void getLatestRun_properList_correctRetrieval() {
@@ -133,7 +133,7 @@ class WorkoutListsTest {
 
     /**
      * Test the behaviour when you try to get the latest run from an empty list.
-     * Expected behaviour is to raise {@code OutOfBounds} exception.
+     * Expected behaviour is to raise OutOfBounds exception.
      */
     @Test
     void getLatestRun_emptyList_throwOutOfBound() {

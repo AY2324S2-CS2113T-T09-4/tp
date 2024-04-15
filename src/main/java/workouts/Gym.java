@@ -44,6 +44,8 @@ public class Gym extends Workout {
      * @param numberOfSet String of the number of sets done.
      * @param numberOfRepetitions String of the number of repetitions done.
      * @param weights String of weights separated by commas. (e.g. "10,20,30,40")
+     * @throws CustomExceptions.InsufficientInput If any of the input fields are empty.
+     * @throws CustomExceptions.InvalidInput If the input fields are invalid.
      */
     public void addStation(String name,
                            String numberOfSet,
@@ -94,7 +96,7 @@ public class Gym extends Workout {
 
     /**
      * Converts the Gym object into a string format suitable for writing into a file.
-     * For more examples, refer to the GymTest method {@code toFileString_correctInput_expectedCorrectString()}.
+     * For more examples, refer to the GymTest method toFileString_correctInput_expectedCorrectString().
      *
      * @return A string representing the Gym object and its GymStation objects unsuitable for writing into a file.
      */
@@ -120,7 +122,7 @@ public class Gym extends Workout {
     }
 
     /**
-     * Used when printing all the workouts. This method takes in parameters {@code index}.
+     * Used when printing all the workouts. This method takes in parameters index.
      *
      * @param index indicates which particular gymStation is being queried.
      * @return A string representing the history format for gym.

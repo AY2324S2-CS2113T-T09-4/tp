@@ -8,21 +8,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * The {@code Appointment} class inherits from the {@code Health} class.
+ * The Appointment class inherits from the Health class.
  * It contains information about the date, time, and description of the appointment.
  */
 public class Appointment extends Health {
-
+    //@@author syj_02
     private LocalDate date;
     private LocalTime time;
     private String description;
     private final Parser parser = new Parser();
     private final HealthList healthList = new HealthList();
 
-    //@@author syj02
-
     /**
-     * Constructor for {@code Appointment} object.
+     * Constructor for Appointment object.
      *
      * @param stringDate A string representing the date of the appointment.
      * @param stringTime A string representing the time of the appointment.
@@ -46,7 +44,7 @@ public class Appointment extends Health {
     }
 
     /**
-     * Retrieves the time of the appointment of {@code LocalTime} type.
+     * Retrieves the time of the appointment of LocalTime type.
      *
      * @return The time of appointment.
      */
@@ -56,7 +54,7 @@ public class Appointment extends Health {
     }
 
     /**
-     * Retrieves the description of the appointment of {@code String} type.
+     * Retrieves the description of the appointment of String type.
      *
      * @return The description of appointment.
      */
@@ -65,9 +63,9 @@ public class Appointment extends Health {
     }
 
     /**
-     * Returns the string representation of an {@code Appointment} object.
+     * Returns the string representation of an Appointment object.
      *
-     * @return A formatted string representing an {@code Appointment} object.
+     * @return A formatted string representing an Appointment object.
      */
     @Override
     public String toString() {

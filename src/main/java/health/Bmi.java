@@ -8,11 +8,12 @@ import constants.HealthConstant;
 import java.time.LocalDate;
 
 /**
- * The {@code Bmi} class inherits from the {@code Health} class.
+ * The Bmi class inherits from the Health class.
  * It contains information about the height, weight, and bmi value of the user, and provides functionalities
  * to calculate and categories the BMI values.
  */
 public class Bmi extends Health {
+    //@@author j013n3
     private double bmiValue;
 
     private LocalDate date;
@@ -22,13 +23,12 @@ public class Bmi extends Health {
     private double weight;
     private Parser parser = new Parser();
 
-
-    //@@author j013n3
     /**
-     * Constructor for {@code Bmi} object.
+     * Constructor for Bmi object.
      *
      * @param height A string representing the user's height.
      * @param weight A string representing the user's weight.
+     * @param date A string representing the date of the record.
      * @throws AssertionError If height or weight values are not positive.
      */
     public Bmi(String height, String weight, String date) {
@@ -42,47 +42,46 @@ public class Bmi extends Health {
 
         this.bmiValue = calculateBmiValue();
         healthList.addBmi(this);
-
     }
 
     /**
-     * Retrieves height recorded in {@code Bmi} object of {@code String} type.
+     * Retrieves height recorded in Bmi object of String type.
      *
-     * @return The height recorded in the {@code Bmi} object.
+     * @return The height recorded in the Bmi object.
      */
     public String getHeight() {
         return String.format(HealthConstant.TWO_DECIMAL_PLACE_FORMAT, height);
     }
 
     /**
-     * Retrieves weight recorded in {@code Bmi} object of {@code String} type.
+     * Retrieves weight recorded in Bmi object of String type.
      *
-     * @return The weight recorded in the {@code Bmi} object.
+     * @return The weight recorded in the Bmi object.
      */
     public String getWeight() {
         return String.format(HealthConstant.TWO_DECIMAL_PLACE_FORMAT, weight);
     }
 
     /**
-     * Retrieves BMI value recorded in {@code Bmi} object of {@code String} type.
+     * Retrieves BMI value recorded in Bmi object of String type.
      *
-     * @return The BMI value recorded in the {@code Bmi} object.
+     * @return The BMI value recorded in the Bmi object.
      */
     public String getBmiValueString() {
         return String.format(HealthConstant.TWO_DECIMAL_PLACE_FORMAT, bmiValue);
     }
 
     /**
-     * Retrieves BMI value recorded in {@code Bmi} object of {@code Double} type.
+     * Retrieves BMI value recorded in Bmi object of Double type.
      *
-     * @return The BMI value recorded in the {@code Bmi} object.
+     * @return The BMI value recorded in the Bmi object.
      */
     public Double getBmiValueDouble() {
         return this.bmiValue;
     }
 
     /**
-     * Prints the BMI category based on the calculated {@code bmiValue}.
+     * Prints the BMI category based on the calculated bmiValue.
      *
      * @param bmiValue The Bmi value to categorize.
      * @return A string presenting the Bmi category.
@@ -104,16 +103,29 @@ public class Bmi extends Health {
     }
 
     /**
-     * Retrieves date recorded in {@code Bmi} object of {@code LocalDate} type.
+     * Retrieves date recorded in Bmi object of LocalDate type.
      *
-     * @return The date recorded in the {@code Bmi} object.
+     * @return The date recorded in the Bmi object.
      */
     public LocalDate getDate() {
         return date;
     }
 
     /**
-     * Calculates {@code bmiValue} based on the height and weight recorded.
+     * Returns the string presentation of a Bmi object.
+     *
+     * @return A formatted string representing a Bmi object.
+     */
+    @Override
+    public String toString() {
+        return String.format(HealthConstant.PRINT_BMI_FORMAT,
+                this.getDate(),
+                this.calculateBmiValue(),
+                getBmiCategory(bmiValue));
+    }
+
+    /**
+     * Calculates bmiValue based on the height and weight recorded.
      *
      * @return The calculated Bmi value.
      * @throws AssertionError If calculated value is not positive.
@@ -123,18 +135,5 @@ public class Bmi extends Health {
                 / UiConstant.ROUNDING_FACTOR;
         assert bmi > HealthConstant.MIN_BMI: ErrorConstant.NEGATIVE_BMI_ERROR;
         return bmi;
-    }
-
-    /**
-     * Returns the string presentation of a {@code Bmi} object.
-     *
-     * @return A formatted string representing a {@code Bmi} object.
-     */
-    @Override
-    public String toString() {
-        return String.format(HealthConstant.PRINT_BMI_FORMAT,
-                this.getDate(),
-                this.calculateBmiValue(),
-                getBmiCategory(bmiValue));
     }
 }
